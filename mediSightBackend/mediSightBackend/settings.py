@@ -25,23 +25,40 @@ SECRET_KEY = 'django-insecure-@bqf(cf%@u$tdd^0w*qn!w-aq94q=ap9k+h1^rwi8$oau6@t#$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # Third-party apps
+    'rest_framework',
+    'drf_spectacular',
+    'corsheaders',
+
+    # Custom apps
+    'accounts',
+    'diagnostics',
+    'records',
+    'chat',
 ]
+
+# Custom User Model
+AUTH_USER_MODEL = 'accounts.User'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -115,3 +132,41 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Static files root for production/admin
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# Spectacular Settings (Swagger/OpenAPI)
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'MediSight API',
+    'DESCRIPTION': 'API endpoints for the MediSight medical application',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
+# Jazzmin Admin Panel Settings
+JAZZMIN_SETTINGS = {
+    "site_title": "MediSight Admin",
+    "site_header": "MediSight",
+    "site_brand": "MediSight Admin",
+    "welcome_sign": "Welcome to the MediSight Backend Admin",
+    "copyright": "MediSight Ltd",
+    "search_model": ["accounts.User", "accounts.PatientProfile"],
+    "show_ui_builder": False,
+    "topmenu_links": [
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "View API Docs", "url": "/api/docs/", "new_window": True},
+    ],
+}
