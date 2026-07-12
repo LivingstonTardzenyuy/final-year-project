@@ -1,0 +1,2509 @@
+CHAPTER ONE
+INTRODUCTION
+1.1 Background and Statement of the Problem
+The rapid advancement of artificial intelligence (AI) and mobile computing technologies has opened new possibilities for transforming healthcare delivery, particularly in
+regions where access to skilled medical personnel and diagnostic infrastructure remains
+severely limited. In low-resource settings across sub-Saharan Africa, healthcare systems
+continue to face persistent challenges, including inadequate facilities, insufficient diagnostic equipment, and a critical shortage of trained medical professionals capable of interpreting complex clinical data World Health Organisation (2022). These challenges collectively undermine the quality, timeliness, and accuracy of disease diagnosis and patient
+management, contributing significantly to preventable morbidity and mortality across the
+region.
+Cameroon operates a three-tiered health system comprising central, intermediate, and
+peripheral levels, with the peripheral level serving as the primary point of contact for the
+majority of the population. At this level, health centres are typically headed by stateregistered nurses, whilst district hospitals are managed by general practitioners who are
+expected to diagnose and treat a wide range of conditions with limited specialist support Mougang et al. (2020). The burden placed on this workforce is considerable, with a
+doctor-to-patient ratio of approximately 1:15,939 and a nurse-to-patient ratio of 1:4,260
+nationally Mougang et al. (2020). These figures reflect a healthcare system under significant strain, where clinical decisions are routinely made without access to specialist
+diagnostic expertise.
+The situation is further compounded in the North-West and South-West regions of
+Cameroon by an ongoing socio-political crisis that began in 2016 and escalated into
+armed conflict in 2017. This crisis, widely referred to as the Anglophone crisis, has
+resulted in the destruction or abandonment of more than 210 health facilities across the
+two regions United Nations Office for the Coordination of Humanitarian Affairs (2023).
+From January to July 2023 alone, at least 16 incidents of violence against or obstruction of healthcare were reported in the North-West and South-West regions, including
+damage to health infrastructure, looting of medical equipment, and threats against health-
+
+1
+
+care workers United Nations Office for the Coordination of Humanitarian Affairs (2023).
+Health personnel have resigned in large numbers for fear of reprisals, further depleting
+an already overstretched workforce and leaving communities in the North-West Region,
+including Bamenda, with severely diminished access to basic healthcare services Fonkwo
+et al. (2023).
+Within this context, infectious diseases such as malaria and tuberculosis represent the
+most significant and persistent diagnostic challenges at the peripheral healthcare level.
+Malaria is the most widespread endemic disease in Cameroon, annually responsible for
+more than two million reported cases and accounting for approximately 3% of all global
+malaria cases Severe Malaria Observatory (2023). The disease accounts for 50% of all
+hospitalisations in health facilities nationally, with 65% of cases occurring among children under five years of age Severe Malaria Observatory (2023). Diagnosis traditionally
+relies on microscopic examination of blood smear slides by trained laboratory personnel, a process that demands skilled technicians and well-maintained equipment that many
+peripheral health facilities are consistently unable to provide Liang et al. (2016). Tuberculosis similarly represents a critical public health burden, with an estimated incidence
+rate of 164 cases per 100,000 persons in Cameroon and a mortality rate exceeding 28%
+Nkwescheu et al. (2023). Accurate TB diagnosis requires interpretation of chest X-ray
+images by trained radiologists, a cadre of specialists largely concentrated in urban referral hospitals and largely unavailable at the district and health centre levels where most
+patients first present World Health Organisation (2023a).
+Compounding these diagnostic challenges is the continued reliance on paper-based
+patient record systems across the majority of health facilities in Cameroon. Physical
+consultation booklets are frequently lost, damaged, or unavailable during clinical encounters, resulting in fragmented patient histories and uninformed clinical decisions. The
+absence of a structured digital patient management infrastructure further limits the ability of healthcare providers to track disease progression, monitor treatment outcomes, and
+support continuity of care across facilities.
+Recent advances in deep learning, a subset of artificial intelligence, have demonstrated
+considerable potential in addressing these gaps. Convolutional neural networks (CNNs)
+have achieved diagnostic accuracy comparable to expert clinicians in tasks such as the detection of pulmonary tuberculosis from chest X-ray images and the identification of mal-
+
+2
+
+aria parasites from blood smear microscopy Rajpurkar et al. (2017); Liang et al. (2016).
+However, the majority of existing AI-based diagnostic systems were developed and validated using high-quality datasets from well-resourced clinical environments, rendering
+them ill-suited for deployment in settings where imaging conditions are variable, data
+is frequently incomplete, and internet connectivity is unreliable Obermeyer et al. (2019).
+Furthermore, most existing systems address single diagnostic tasks in isolation and do not
+integrate patient management, clinical communication, and offline operational capability
+within a single accessible platform.
+This study therefore addressed these gaps by designing and developing a mobile artificial intelligence system for clinical diagnosis support and patient management in lowresource healthcare settings. The system integrated deep learning models for malaria
+and tuberculosis detection, a digital patient record platform, and an AI-assisted clinical
+chat feature within a hybrid offline/online mobile application, providing a comprehensive
+and contextually appropriate tool for healthcare delivery in resource-constrained environments such as Cameroon.
+1.2 Rationale
+The rationale for this study is grounded in three converging realities: the critical shortage of diagnostic expertise in Cameroonian healthcare facilities, the demonstrated potential of artificial intelligence in medical image analysis, and the growing penetration of
+mobile technology across sub-Saharan Africa as a viable platform for healthcare service
+delivery.
+As established in Section 1.1, healthcare facilities at the peripheral level in Cameroon
+routinely operate without access to trained radiologists or laboratory specialists capable
+of interpreting diagnostic imaging for diseases such as tuberculosis and malaria. The
+consequences of this shortage are measurable and severe, contributing directly to delayed
+diagnosis, inappropriate treatment, and avoidable deaths. Existing AI-based diagnostic
+tools have demonstrated the technical capacity to address this gap; however, the majority
+were developed using high-quality datasets from well-resourced environments and have
+not been designed to function reliably under the conditions that characterise Cameroonian healthcare settings, including degraded imaging equipment, variable image quality,
+and unreliable internet connectivity Sendra-Balcells et al. (2023). A systematic scoping
+
+3
+
+review on deploying medical AI in low-resource settings identified unreliable internet access, incomplete data, and limited familiarity with AI among healthcare workers as the
+most common barriers to effective deployment Al-Ganad et al. (2026). These barriers are
+directly applicable to the Cameroonian context and informed the design decisions made
+in this study.
+The choice to focus on malaria and tuberculosis as the target diseases was driven by
+their status as the two most diagnostically underserved high-burden infectious diseases in
+Cameroon. Both diseases are amenable to image-based AI diagnosis, with malaria detectable from blood smear microscopy images and tuberculosis identifiable from chest X-ray
+images, making them well-suited to a unified deep learning pipeline within a single mobile platform. Furthermore, both diseases disproportionately affect the communities most
+distant from specialist diagnostic services, reinforcing the appropriateness of a mobilebased solution designed for peripheral healthcare delivery.
+The rationale for adopting a mobile-first architecture is supported by evidence of rapid
+and sustained growth in mobile technology adoption across sub-Saharan Africa. According to the Global System for Mobile Communications Association, smartphones accounted for 49% of mobile connections in sub-Saharan Africa in 2022 and were projected
+to account for 61% of connections by 2025 Gahagan et al. (2023). Mobile health applications have been shown to improve patient monitoring, medication adherence, and
+healthcare worker communication, particularly in rural areas where fixed infrastructure
+is limited Betjeman et al. (2013). The widespread availability of smartphones among
+healthcare workers in Cameroon therefore presents a practical and scalable platform for
+deploying AI-assisted diagnostic tools without requiring the installation of specialised
+hardware.
+The decision to incorporate a hybrid offline and online architecture further strengthens
+the rationale for this study. Connectivity remains inconsistent across much of Cameroon,
+particularly in rural areas in Cameroon. A system designed to function exclusively over
+an internet connection would be fundamentally unsuitable for this environment. By enabling on-device inference using compressed deep learning models, the proposed system
+ensured that diagnostic support remained available to healthcare workers regardless of
+network availability, with results synchronised to the central server when connectivity
+was restored.
+
+4
+
+Finally, the integration of a digital patient record system addresses a gap that purely
+diagnostic AI tools do not consider. The absence of structured patient records is not
+merely an inconvenience; it is a systemic barrier to continuity of care, treatment monitoring, and informed clinical decision-making. By combining AI-assisted diagnosis with
+a longitudinal digital health record accessible to both doctors and patients, this study addressed a broader and more realistic picture of what is required to improve healthcare
+delivery in low-resource settings.
+1.3 Research Questions
+1.3.1 Main Research Question
+How can a mobile artificial intelligence system be designed and developed to support
+clinical diagnosis and patient management in low-resource healthcare settings?
+1.3.2 Specific Research Questions
+The following specific research questions guided the study:
+1. How can a convolutional neural network be trained to accurately detect tuberculosis
+from chest X-ray images that are subject to real-world degradation and variability
+in low-resource clinical environments?
+2. How can a convolutional neural network be trained to accurately detect malaria
+from blood smear images captured using a mobile phone camera through a microscope eyepiece, accounting for domain shift between training data and real-world
+acquisition conditions?
+3. How can deep learning models for medical image classification be optimised for
+deployment on mobile devices with limited computational resources and unreliable
+internet connectivity?
+4. How can a mobile-based platform be designed to integrate AI-assisted diagnosis,
+digital patient records, and a patient-aware clinical chat feature within a secure and
+accessible application for use in low-resource healthcare settings?
+
+5
+
+1.4 Objectives
+1.4.1 Overall Objective
+The overall objective of the present study was to design and develop a mobile artificial
+intelligence system for clinical diagnosis support and patient management in low-resource
+healthcare settings.
+1.4.2 Specific Objectives
+The specific objectives were to:
+1. Design and train a convolutional neural network model for the detection of tuberculosis from chest X-ray images, incorporating data augmentation strategies to improve model robustness to real-world image degradation.
+2. Design and train a convolutional neural network model for the detection of malaria
+from mobile phone-captured blood smear images, addressing domain shift between
+publicly available training datasets and real-world acquisition conditions in lowresource clinical environments.
+3. Optimise and deploy both trained models on a mobile platform using model quantisation and TorchScript conversion, and implement a hybrid offline and online inference architecture to ensure system availability under conditions of unreliable
+internet connectivity.
+4. Design and implement a secure mobile application integrating AI-assisted diagnosis,
+a digital patient record system, and a patient-aware AI clinical chat feature, with
+role-based access control and biometric authentication for doctors and patients.
+1.5 Significance of the Study
+This study carried significant implications for healthcare delivery, technology development, and academic research, particularly within the context of low-resource settings
+in Cameroon and sub-Saharan Africa more broadly.
+From a healthcare perspective, the most immediate significance of this study lies in its
+potential to reduce the diagnostic gap that exists at the peripheral level of the Cameroonian
+health system. With a doctor-to-patient ratio of 1:15,939 and more than 210 health facilities rendered non-functional by the ongoing Anglophone crisis in the North-West and
+6
+
+South-West regions United Nations Office for the Coordination of Humanitarian Affairs
+(2023), healthcare workers are routinely required to make diagnostic decisions without
+access to specialist support. The AI-assisted diagnostic component of the proposed system offered a practical means of extending specialist-level diagnostic capability to general
+practitioners and nurses operating in district hospitals and health centres, particularly for
+malaria and tuberculosis, which together account for a substantial proportion of preventable morbidity and mortality in Cameroon Severe Malaria Observatory (2023); World
+Health Organisation (2023a).
+For patients, the digital health record component of the system addressed a longstanding structural weakness in Cameroonian healthcare delivery. The replacement of paperbased consultation booklets with a secure, mobile-accessible digital record improved continuity of care by ensuring that a patient’s complete medical history, diagnosis results, and
+doctor notes remained consistently available regardless of which facility the patient visited. This is particularly significant in conflict-affected areas where physical records are
+frequently lost or destroyed.
+From a technological perspective, this study contributed to the growing body of knowledge on the adaptation of deep learning models for deployment in low-resource environments. The domain shift problem, which arises when models trained on high-quality
+datasets from well-resourced settings are deployed in environments with degraded or variable imaging conditions, represents one of the most significant barriers to the real-world
+adoption of medical AI in sub-Saharan Africa Sendra-Balcells et al. (2023). By explicitly
+addressing this problem through targeted data augmentation strategies and mobile optimisation techniques, this study demonstrated a methodological approach that is replicable
+and extensible to other disease contexts and geographic settings beyond Cameroon.
+The hybrid offline and online architecture developed in this study further contributed
+to the field of mobile health informatics by demonstrating a practical approach to ensuring AI system availability in environments with unreliable internet connectivity. This
+architectural approach is broadly applicable to any mobile health application intended
+for deployment in rural or conflict-affected settings across sub-Saharan Africa and other
+low-resource regions globally.
+From an academic perspective, this study provided a foundation for future research
+in several directions. These include the fine-tuning of the developed models on locally
+
+7
+
+collected Cameroonian clinical datasets, the extension of the diagnostic platform to cover
+additional high-burden diseases such as typhoid and HIV, and the conduct of formal clinical validation studies to assess the performance of the system in real-world deployment
+conditions. The system architecture, model optimisation pipeline, and evaluation methodology developed in this study constitute a reusable framework for subsequent research
+in mobile medical AI for low-resource settings.
+Finally, this study is significant in the context of the University of Bamenda and the
+National Higher Polytechnic Institute specifically, as it represents a locally grounded response to a locally defined problem, developed by a researcher embedded within the affected community. The system was designed with direct knowledge of the operational
+realities of healthcare delivery in the North-West Region of Cameroon, ensuring that
+the solutions proposed were contextually appropriate, practically deployable, and aligned
+with the genuine needs of the communities they were intended to serve.
+
+8
+
+CHAPTER TWO
+LITERATURE REVIEW
+2.1 Introduction
+This chapter presents a systematic review of existing literature relevant to the design
+and development of a mobile artificial intelligence system for clinical diagnosis support
+and patient management in low-resource healthcare settings. The review is organised
+thematically, covering the key conceptual and technical areas that underpin the present
+study. These areas include the application of artificial intelligence in healthcare, deep
+learning for medical image analysis, convolutional neural network-based approaches for
+tuberculosis and malaria detection, methods for handling degraded and noisy medical
+images, mobile artificial intelligence and model optimisation, mobile health applications
+in low-resource settings, digital patient record systems in sub-Saharan Africa, security
+in mobile health applications, software development life cycle models, and existing AIbased healthcare systems. The chapter concludes with a synthesis of the identified gaps in
+existing knowledge and an explanation of how the present study sought to address those
+gaps.
+2.2 Artificial Intelligence in Healthcare
+Artificial intelligence refers to the simulation of human cognitive functions by computational systems, encompassing capabilities such as learning, reasoning, problem-solving,
+and pattern recognition Esteva et al. (2019). Within the healthcare domain, AI has emerged
+as a transformative technology, offering tools and methods that support clinical decisionmaking, improve diagnostic accuracy, and enhance the efficiency of healthcare delivery
+across a wide range of medical specialties.
+The application of AI in healthcare can be broadly categorised into three principal
+approaches: machine learning, deep learning, and natural language processing. Machine
+learning involves the use of algorithms that learn patterns from structured data without
+being explicitly programmed, and has been applied extensively to tasks such as disease
+prediction, risk stratification, and patient outcome forecasting. Deep learning, a subset
+of machine learning based on artificial neural networks with multiple processing layers,
+has demonstrated particularly strong performance in tasks involving unstructured data
+
+9
+
+such as medical images, clinical notes, and audio signals Esteva et al. (2019). Natural
+language processing enables machines to understand and generate human language, and
+has found application in the analysis of electronic health records, clinical documentation,
+and medical literature mining.
+Esteva et al. (2019) provided one of the most comprehensive foundational overviews
+of deep learning techniques in healthcare, covering applications in computer vision for
+medical imaging, natural language processing for electronic health record analysis, reinforcement learning for robotic-assisted surgery, and generalised methods for genomics.
+The authors demonstrated that deep learning systems had achieved performance levels
+comparable to, and in some cases exceeding, those of expert clinicians in specific diagnostic tasks. However, the authors also acknowledged that the development and deployment of such systems remained predominantly concentrated in high-income countries
+with access to large, well-annotated datasets and advanced computational infrastructure.
+The applicability of these systems to low-resource settings where data quality is variable
+and infrastructure is limited was identified as a critical and underexplored area.
+This limitation was further examined by Adepoju et al. (2021), who reviewed the
+status and challenges of AI in the African healthcare context. The authors identified
+three principal barriers to effective AI deployment in sub-Saharan Africa: the scarcity
+of locally representative training data, the absence of robust digital health infrastructure,
+and the shortage of AI expertise among local health technology practitioners. The review
+concluded that AI systems intended for African healthcare contexts must be designed
+with an explicit awareness of local infrastructure constraints, must prioritise operational
+reliability under conditions of limited connectivity, and must demonstrate performance
+that is robust to the data quality variability inherent in real-world low-resource clinical
+settings. These conclusions directly informed the design decisions adopted in the present
+study.
+The potential of AI to address the diagnostic workforce shortfall in low-resource settings has nonetheless been increasingly recognised Osei et al. (2022) noted that Africa
+bears approximately 25% of the global disease burden whilst having access to only 3%
+of the world’s healthcare professionals, a disparity that AI-assisted diagnostic tools could
+help to mitigate if appropriately adapted for local deployment conditions. The present
+study contributed to this effort by developing and evaluating AI models specifically de-
+
+10
+
+signed for deployment under the infrastructure and data quality conditions that characterise healthcare delivery in the North-West Region of Cameroon.
+2.3 Deep Learning for Medical Image Analysis
+Deep learning refers to a class of machine learning methods that use artificial neural
+networks composed of multiple processing layers to learn hierarchical representations of
+data directly from raw inputs LeCun et al. (2015). Unlike traditional machine learning approaches, which rely on manually engineered features extracted by domain experts, deep
+learning models learn to extract and represent relevant features automatically through exposure to large volumes of labelled training data. This capacity for automatic feature
+learning has made deep learning particularly well-suited to the analysis of complex, highdimensional data such as medical images, where the relevant diagnostic features are often
+subtle, spatially distributed, and difficult to define explicitly through hand-crafted rules.
+LeCun et al. (2015) provided a landmark review of deep learning in their widely cited
+paper published in the journal Nature, establishing the theoretical foundations of the field
+and demonstrating its transformative potential across a range of domains. The authors
+described how deep neural networks learn representations of data with multiple levels
+of abstraction, enabling the detection of complex patterns in images, text, and speech
+that were previously inaccessible to conventional algorithms. This foundational work
+established the basis on which subsequent medical imaging research was built.
+The application of deep learning to medical image analysis was comprehensively surveyed by Litjens et al. (2017), who reviewed over 300 contributions to the field covering
+tasks including image classification, object detection, segmentation, and image registration across a wide range of clinical application areas. The authors identified convolutional
+neural networks as the dominant architectural paradigm for image-based tasks, noting
+their ability to exploit the spatial structure of images through the use of learnable convolutional filters applied hierarchically across network layers. The survey demonstrated
+that deep learning had achieved state-of-the-art performance in applications spanning radiology, pathology, ophthalmology, and dermatology, and concluded that the field was
+undergoing a period of rapid and transformative growth. However, the authors also noted
+that the majority of reviewed studies used datasets collected in well-resourced clinical
+environments, and that the generalisation of deep learning models to diverse, real-world
+
+11
+
+deployment conditions remained an open and underexplored challenge.
+Within medical image analysis, the convolutional neural network represents the most
+widely adopted deep learning architecture. A CNN processes an input image through a
+series of convolutional layers, each of which applies a set of learnable filters to extract
+spatially local features such as edges, textures, and patterns at progressively higher levels
+of abstraction. The output of these convolutional layers is typically passed through pooling layers that reduce spatial dimensionality while preserving the most salient feature
+activations, and finally through fully connected layers that map the extracted feature representations to output class probabilities Litjens et al. (2017). This hierarchical feature
+extraction process allows CNNs to capture both low-level structural details and high-level
+semantic content within medical images, making them highly effective for diagnostic
+classification tasks.
+A significant advancement in CNN architecture came with the introduction of residual networks by He et al. (2016), who proposed a framework that reformulated network
+layers as learning residual functions with reference to their inputs. This residual learning
+approach enabled the effective training of networks with substantially greater depth than
+had previously been feasible, with the authors demonstrating that a 152-layer residual
+network achieved a top-5 error rate of 3.57% on the ImageNet classification benchmark,
+surpassing all previously reported results. The residual connection mechanism addressed
+the vanishing gradient problem that had limited the depth of earlier networks, and the
+resulting ResNet architecture has since been widely adopted as a backbone for medical
+image analysis tasks, including tuberculosis detection from chest X-rays and malaria detection from blood smear microscopy images He et al. (2016).
+However, the computational demands of deep residual networks and similar largescale architectures present a significant challenge for deployment on mobile devices with
+limited processing power and memory Howard et al. (2017) addressed this challenge
+through the introduction of MobileNets, a family of lightweight CNN architectures specifically designed for efficient inference on mobile and embedded systems. MobileNets
+employ depthwise separable convolutions, which factorise standard convolutions into a
+depthwise convolution applied independently to each input channel followed by a pointwise convolution that combines the channel outputs. This factorisation substantially reduces the number of parameters and computational operations required, whilst preserving
+
+12
+
+a large proportion of the representational capacity of the equivalent standard convolution.
+Howard et al. Howard et al. (2017) demonstrated that MobileNets achieved competitive
+accuracy on standard image classification benchmarks whilst requiring significantly fewer
+floating-point operations than comparable architectures, making them a practical choice
+for on-device inference in resource-constrained environments.
+The relevance of these architectural developments to the present study is direct. The
+computational efficiency of MobileNetV2, an improved version of the original MobileNet
+architecture, made it a suitable backbone for the CNN models developed in this study,
+where deployment on mobile devices under conditions of limited computational resources
+was a primary design constraint. The use of residual connections within the MobileNetV2
+architecture further contributed to training stability and model performance, particularly
+given the relatively small size of the tuberculosis and malaria training datasets employed
+in this study.
+A key consideration in the application of deep learning to medical image analysis is
+the requirement for large, well-annotated training datasets to achieve robust model performance. In practice, the collection and annotation of medical imaging data is costly,
+time-consuming, and subject to significant regulatory and ethical constraints. Transfer
+learning has emerged as the principal strategy for addressing this data scarcity challenge,
+whereby a model pre-trained on a large general-purpose dataset such as ImageNet is subsequently fine-tuned on a smaller domain-specific medical imaging dataset Litjens et al.
+(2017). The pre-trained model retains the low-level and mid-level feature representations learned from the large general dataset, which are then adapted through fine-tuning
+to the specific characteristics of the target medical imaging task. This approach has been
+demonstrated to yield substantial improvements in model performance under limited data
+conditions compared to training from scratch, and was adopted in the present study for
+both the tuberculosis and malaria detection models.
+Despite these advances, the application of deep learning to medical image analysis in
+low-resource settings introduces challenges that are not adequately addressed by the existing literature. The majority of published deep learning models for medical image analysis
+were trained and evaluated using datasets collected under controlled, high-quality imaging
+conditions. When such models are deployed in low-resource environments where imaging
+equipment is rudimentary and image acquisition conditions are variable, a phenomenon
+
+13
+
+known as domain shift occurs, in which the statistical distribution of the deployment data
+differs significantly from that of the training data, resulting in a degradation of model
+performance Sendra-Balcells et al. (2023). The present study directly addressed this challenge by incorporating domain-shift-aware data augmentation strategies into the model
+training pipeline, as described in detail in Chapter 3.
+2.4 Convolutional Neural Networks for Tuberculosis Detection
+Tuberculosis is a chronic infectious disease caused by the bacterium Mycobacterium
+tuberculosis, primarily affecting the lungs and manifesting radiologically as abnormalities in chest X-ray images including infiltrates, cavitation, nodules, and pleural effusion
+World Health Organisation (2023a). The interpretation of these radiological features traditionally requires the expertise of a trained radiologist, a resource that is consistently
+unavailable at the peripheral healthcare level in low-income countries such as Cameroon.
+The application of convolutional neural networks to the automated detection of tuberculosis from chest X-ray images has therefore attracted significant research attention as a
+means of extending diagnostic capability to resource-constrained settings.
+The foundational datasets underpinning much of the research in this area were introduced by Jaeger et al. (2014), who published two publicly available chest X-ray datasets
+on behalf of the United States National Library of Medicine. The first dataset, collected
+from the Department of Health and Human Services of Montgomery County, Maryland,
+contains 138 posterior-anterior chest X-ray images, of which 58 are positive for tuberculosis and 80 are normal. The second dataset, collected from Shenzhen No. 3 People’s
+Hospital in collaboration with Guangdong Medical College in China, contains 662 chest
+X-ray images, of which 336 are positive for tuberculosis and 326 are normal. Both datasets contain associated radiologist readings and were made publicly available to foster research in computer-aided diagnosis of pulmonary tuberculosis. These two datasets were
+selected for use in the present study due to their public availability, established use in
+the literature, and the diversity of tuberculosis presentations they collectively represent
+Jaeger et al. (2014) noted that the datasets were collected under real-world clinical conditions, introducing natural variability in image quality, patient positioning, and radiological
+presentation that makes them a realistic basis for model training and evaluation.
+Subsequent research demonstrated the feasibility of deep learning for tuberculosis
+
+14
+
+detection using these and related datasets Rajpurkar et al. (2017) proposed CheXNet, a
+121-layer densely connected CNN trained on the NIH Chest X-ray dataset containing
+over 100,000 chest X-ray images labelled across 14 pathological conditions, including
+pneumonia, infiltration, and effusion. The model achieved an F1 score of 0.435 on the
+pneumonia detection task, which the authors reported exceeded the mean performance of
+a panel of four board-certified radiologists at 0.387. Whilst CheXNet was not specifically
+developed for tuberculosis detection, the study was landmark in demonstrating that deep
+learning models trained at scale could achieve clinician-level performance on chest Xray interpretation, establishing the theoretical basis for subsequent tuberculosis-specific
+models. However, the study relied on an exceptionally large dataset collected from a
+major United States hospital, a condition that is not reproducible in low-resource settings
+such as Cameroon.
+Rajaraman and Antani (2020) addressed the challenge of tuberculosis detection more
+directly by proposing an ensemble of modality-specific deep learning models evaluated
+on the Shenzhen and Montgomery datasets. The authors fine-tuned multiple pre-trained
+CNN architectures including VGG-16, InceptionV3, and Xception, and combined their
+predictions through an ensemble strategy that leveraged the complementary strengths
+of each model. The ensemble approach achieved an area under the receiver operating
+characteristic curve of 0.99 on the Shenzhen dataset and 0.98 on the Montgomery dataset, demonstrating that transfer learning from large general-purpose image datasets combined with domain-specific fine-tuning could achieve near-perfect discrimination between
+tuberculosis-positive and normal chest X-rays on these benchmarks. The authors further
+noted that the modality-specific training approach, in which models were fine-tuned specifically on chest X-ray data rather than general natural images, yielded substantially improved performance compared to direct application of ImageNet-pretrained models. This
+finding informed the transfer learning strategy adopted in the present study.
+Rahman et al. (2020) conducted a comprehensive study employing nine different deep
+CNN architectures for tuberculosis detection, including ResNet18, ResNet50, ResNet101,
+CheXNet, InceptionV3, VGG19, DenseNet201, SqueezeNet, and MobileNet, trained on a
+combined dataset of 700 tuberculosis-positive and 3,500 normal chest X-ray images. The
+study also incorporated lung segmentation as a preprocessing step, isolating the lung regions prior to classification. The best-performing model achieved an accuracy of 99.9%,
+
+15
+
+sensitivity of 99.9%, and specificity of 99.52% when applied to segmented lung images,
+compared to an accuracy of 97.07% and sensitivity of 97.07% on unsegmented whole
+X-ray images. The authors concluded that segmentation of the lung region prior to classification substantially improved detection performance by reducing the influence of nondiagnostic image regions such as the ribcage and soft tissue. Whilst these results are
+impressive, the authors acknowledged that the dataset used was compiled from multiple
+public sources and therefore did not reflect the image quality variability characteristic of
+real-world clinical settings in low-resource environments. Furthermore, the study evaluated MobileNet as one of the architectures, reporting competitive performance relative to
+much larger models, which supported the selection of the MobileNetV2 architecture in
+the present study on grounds of both accuracy and computational efficiency.
+Santosh et al. (2022) conducted a systematic review of deep learning techniques for
+tuberculosis screening from chest X-rays covering publications from the preceding five
+years. The review identified several consistent findings across the surveyed literature.
+First, transfer learning from ImageNet-pretrained models consistently outperformed training from scratch, particularly when the available tuberculosis-specific training dataset was
+small, as is the case with the Shenzhen and Montgomery datasets. Second, data augmentation strategies including random rotation, horizontal flipping, brightness adjustment, and
+zoom were widely employed to mitigate overfitting and improve model generalisation under limited data conditions. Third, and most relevantly for the present study, the authors
+identified domain shift as a critical and largely unaddressed challenge, noting that the
+majority of published models had been evaluated exclusively on controlled benchmark
+datasets and that their performance under real-world clinical imaging conditions, particularly in low-resource settings, remained largely unknown. The review explicitly called
+for research addressing the robustness of tuberculosis detection models to the image quality variability and acquisition condition variability that characterise healthcare settings in
+low-income countries, directly identifying the research gap that the present study sought
+to address.
+Despite the strong performance reported in the literature, several limitations constrain
+the applicability of existing tuberculosis detection models to the deployment context of
+the present study. First, the majority of high-performing models employ large, computationally intensive architectures such as DenseNet201, ResNet101, and InceptionV3
+
+16
+
+that are not feasible for on-device inference on mid-range mobile phones with limited
+processing power and memory. Second, most studies report performance on standardised benchmark datasets and do not evaluate model robustness under conditions of image
+degradation or variable acquisition quality, which are characteristic of chest X-rays captured using portable or low-cost equipment in peripheral health facilities. Third, none of
+the reviewed studies address the specific challenge of deploying tuberculosis detection
+models in a hybrid offline and online mobile application architecture suitable for environments with unreliable internet connectivity. The present study addressed all three of these
+limitations by selecting the computationally efficient MobileNetV2 architecture, incorporating domain-shift-aware augmentation strategies to improve robustness to degraded
+image quality, and integrating the trained model within a hybrid offline and online mobile
+application designed for deployment in the North-West Region of Cameroon.
+2.5 Convolutional Neural Networks for Malaria Detection
+Malaria is a life-threatening infectious disease caused by Plasmodium parasites transmitted to humans through the bite of infected female Anopheles mosquitoes. The disease
+disproportionately affects populations in sub-Saharan Africa, which accounted for 93.6%
+of all global malaria cases and 95.4% of all malaria-related deaths in 2022, with an estimated 249 million cases and 608,000 fatalities reported globally in that year World Health
+Organisation (2023b). The microscopic examination of Giemsa-stained thin blood smear
+slides remains the current gold standard for malaria diagnosis, enabling the identification and classification of Plasmodium parasites within red blood cells at different stages
+of their life cycle, including the ring, trophozoite, schizont, and gametocyte stages Rajaraman et al. (2018). However, this diagnostic process is inherently dependent on the
+availability of trained microscopists, well-maintained microscopes, and consistent slide
+preparation quality, conditions that are rarely met simultaneously in peripheral health facilities across sub-Saharan Africa and Cameroon specifically. The application of convolutional neural networks to automate malaria parasite detection from blood smear images
+has therefore attracted substantial and growing research interest as a means of reducing
+this dependence on scarce skilled personnel.
+The foundational dataset for CNN-based malaria detection research was developed
+by researchers at the Lister Hill National Center for Biomedical Communications at the
+
+17
+
+United States National Library of Medicine and published alongside the landmark study
+by Rajaraman et al. (2018). The dataset, herein referred to as the NIH Malaria Cell Images dataset, was created from Giemsa-stained thin blood smear slides collected from
+150 patients infected with Plasmodium falciparum and 50 healthy patients. Images of
+slides were captured using a smartphone camera for each microscopic field of view, and
+individual cell images were extracted using a level-set based segmentation algorithm. Expert slide readers at the Mahidol-Oxford Tropical Medicine Research Unit in Bangkok,
+Thailand manually annotated all images. The resulting dataset contains a total of 27,558
+segmented cell images, comprising 13,779 parasitised images and 13,779 uninfected images, distributed in a perfectly balanced binary classification format. The dataset was
+made publicly available through the National Library of Medicine and has since become
+the most widely used benchmark for malaria detection research. This dataset was selected
+for use in the present study due to its public availability, its balanced class distribution,
+its established use as a benchmark across the literature, and the critical observation that
+the original images were captured using a smartphone camera held to a microscope eyepiece, which closely mirrors the image acquisition conditions anticipated in the target
+deployment environment of Cameroonian health facilities.
+Rajaraman et al. (2018) evaluated the performance of multiple pre-trained CNN architectures as feature extractors for malaria parasite classification using the NIH dataset. The
+architectures evaluated included AlexNet, VGG-16, Xception, ResNet-50, and a custom
+CNN, each fine-tuned on the malaria cell image dataset. The study found that all pretrained models substantially outperformed the custom CNN trained from scratch, demonstrating the clear benefit of transfer learning for this task. The best-performing model, a
+fine-tuned Xception network, achieved an accuracy of 95.9%, a sensitivity of 95.6%, a
+specificity of 96.2%, and an area under the receiver operating characteristic curve of 0.99
+on the test set. The authors concluded that pre-trained CNNs used as feature extractors,
+combined with fine-tuning on domain-specific data, provided a highly effective and practically viable approach to automated malaria detection. This finding directly informed the
+transfer learning strategy adopted in the present study.
+Subsequent studies further advanced the performance of CNN-based malaria detection models on the NIH dataset Siłka et al. (2023) proposed a novel CNN architecture
+that achieved a classification accuracy of 99.68% on the NIH Malaria Cell Images data-
+
+18
+
+set, with high sensitivity and specificity. The authors attributed this performance to the use
+of residual connections, dropout regularisation, and careful hyperparameter optimisation.
+Similarly, a systematic review by Yusuf et al. (2024) covering peer-reviewed publications
+from 2020 to 2024 identified ResNet and VGG architectures as the most accurate models
+for digital malaria diagnosis, achieving peak accuracies of 99.12%, and noted that custom
+CNN-based models were used in 58% of reviewed studies. The review further identified the NIH dataset as the most widely used benchmark, appearing in the majority of
+reviewed studies, and concluded that deep learning had achieved a level of performance
+sufficient for clinical support applications. However, the review also noted that most highperforming models had been developed and evaluated under controlled dataset conditions
+and had not been tested for robustness to real-world image quality variability.
+A particularly important strand of research for the present study concerns the application of deep learning to malaria detection specifically under the image acquisition conditions characteristic of low-resource clinical settings. The original NIH dataset, whilst
+captured using a smartphone camera, was acquired under standardised conditions with
+consistent lighting and focal distance. In contrast, blood smear images captured by a
+clinician using a mobile phone held manually to a microscope eyepiece in a peripheral
+health facility introduce additional sources of variability including vignetting from the
+circular eyepiece aperture, uneven illumination, variable focus, colour distortion from
+automatic white balance correction, and motion blur. ? demonstrated that malaria detection models trained on standardised laboratory datasets exhibited significant performance
+degradation when evaluated on images captured under field conditions in Uganda, with
+accuracy declining by up to 15 percentage points. This finding illustrates the domain shift
+problem directly and demonstrates that benchmark performance on the NIH dataset cannot be assumed to translate to real-world deployment accuracy under variable acquisition
+conditions.
+More recently, research has begun to address the phone-captured microscopy challenge directly. A study by Kanafani et al. (2024) employed the ConvNeXt architecture
+with transfer learning and augmentation strategies specifically designed to simulate the
+image degradation introduced by smartphone-based microscopy acquisition, including
+vignetting simulation, colour jitter, and defocus blur augmentation. The authors reported
+that models trained with these degradation-aware augmentation strategies substantially
+
+19
+
+outperformed baseline models on images captured via smartphone through a microscope
+eyepiece, demonstrating that augmentation-based domain adaptation is a viable and practically accessible strategy for improving model robustness under low-resource acquisition conditions. This study provided direct methodological support for the augmentation
+strategy adopted in the present study for the malaria detection model.
+Despite the strong body of research demonstrating the feasibility of CNN-based malaria detection, several critical gaps remain. First, whilst the NIH Malaria Cell Images
+dataset has been extensively used, the majority of studies employ it without accounting for
+the domain shift that arises when models trained on this dataset are deployed in real-world
+clinical settings with variable image quality. Second, most high-performing models employ large, computationally intensive architectures that are not suitable for on-device inference on mid-range smartphones. Third, no existing study has addressed the integration
+of a malaria detection model within a hybrid offline and online mobile health application
+designed specifically for deployment in a low-connectivity sub-Saharan African healthcare context. The present study addressed all three of these gaps through the selection
+of the computationally efficient MobileNetV2 architecture, the adoption of domain-shiftaware augmentation strategies informed by the literature on phone-captured microscopy,
+and the integration of the trained model within a hybrid mobile application designed for
+deployment in the North-West Region of Cameroon.
+2.6 Handling Degraded and Noisy Medical Images
+The performance of deep learning models for medical image classification is critically
+dependent on the quality and representativeness of the data on which they are trained. In
+clinical practice, and particularly in low-resource settings, medical images are frequently
+subject to a range of degradation factors that reduce their quality relative to the controlled
+datasets typically used for model training. These factors include poor illumination, motion blur, variable focus, artefacts introduced by low-cost imaging equipment, inconsistent
+staining in histological preparations, and, in the context of the present study, the optical
+distortions and vignetting introduced when images are captured using a smartphone camera held manually to a microscope eyepiece. The capacity of a deep learning model to
+maintain reliable diagnostic performance in the presence of such degradation is referred
+to as robustness, and it constitutes one of the most significant and practically import-
+
+20
+
+ant challenges in the deployment of medical AI systems in low-resource environments
+Sendra-Balcells et al. (2023).
+The domain shift problem, wherein the statistical distribution of images encountered
+at deployment differs from that of the training dataset, is the primary mechanism through
+which image degradation degrades model performance Guan and Liu (2021) provided a
+comprehensive survey of domain adaptation methods in medical image analysis, categorising sources of domain shift into demographic shifts arising from patient heterogeneity,
+and protocol and modality shifts arising from differences in imaging equipment, acquisition parameters, noise characteristics, and image resolution. The authors reviewed a broad
+range of domain adaptation strategies and concluded that, whilst significant progress had
+been made in developing methods to address domain shift in well-resourced research
+settings, the application of these methods to genuinely low-resource deployment environments remained an open and insufficiently studied problem. This conclusion is directly
+applicable to the deployment context of the present study, where both the tuberculosis
+detection model and the malaria detection model are trained on publicly available datasets collected under conditions that differ substantively from those of peripheral health
+facilities in Cameroon.
+Data augmentation is the most widely adopted and practically accessible strategy for
+improving model robustness to image degradation and domain shift Chlap et al. (2021)
+conducted a systematic review of data augmentation techniques for medical imaging deep
+learning applications, covering geometric transformations, intensity transformations, and
+generative model-based augmentation approaches. The authors identified geometric transformations including random rotation, flipping, cropping, and affine distortion as the most
+commonly applied augmentation strategies, and noted that intensity transformations including brightness adjustment, contrast variation, Gaussian noise addition, and colour jitter were particularly effective for improving robustness to the kind of imaging variability
+encountered across different clinical environments and equipment types. The review concluded that data augmentation consistently improved model generalisation when applied
+appropriately, but emphasised that augmentation strategies must be designed with an explicit understanding of the specific degradation patterns expected in the target deployment
+environment rather than applied generically. This finding directly guided the design of the
+augmentation pipeline adopted in the present study, where each augmentation transform
+
+21
+
+was selected to simulate a specific and realistic source of image degradation expected in
+the Cameroonian clinical context.
+For the malaria detection model specifically, the primary sources of image degradation anticipated in the deployment environment arise from the use of a smartphone camera
+held to the eyepiece of a basic light microscope. These include circular vignetting from
+the microscope eyepiece aperture, uneven illumination across the field of view, colour
+distortion introduced by the smartphone’s automatic white balance algorithm, variable
+focus resulting from the lack of a fixed camera-to-eyepiece mount, and motion blur from
+hand tremor during image capture Kanafani et al. (2024) demonstrated that CNN models for malaria detection trained without these degradation-aware augmentations exhibited substantial performance degradation when evaluated on images captured via smartphone through a microscope eyepiece, and that models trained with targeted augmentation
+strategies designed to simulate phone-captured microscopy conditions substantially outperformed the baseline. This study provides direct methodological justification for the
+degradation-aware augmentation approach adopted for the malaria detection model in the
+present study.
+For the tuberculosis detection model, the principal sources of image degradation in
+the target deployment environment arise from the use of low-cost or portable digital Xray equipment, variable patient positioning, and suboptimal exposure settings Rahman
+et al. (2020) demonstrated that data augmentation including random rotation, horizontal
+flipping, brightness adjustment, zoom, and shear transformation substantially improved
+tuberculosis detection model performance on the Shenzhen and Montgomery datasets.
+The authors noted that augmentation was particularly important given the relatively small
+size of these datasets, where the risk of overfitting without augmentation was considerable
+Santosh et al. (2022) similarly concluded from their five-year systematic review that data
+augmentation was a consistent and essential component of high-performing tuberculosis
+detection models, and that the specific choice of augmentation parameters should reflect
+the expected variability in image quality across clinical deployment environments.
+Beyond geometric and intensity-based augmentation, MixUp training, introduced by
+Zhang et al. (2018), represents an additional strategy for improving model robustness
+to ambiguous and degraded inputs. MixUp generates virtual training examples by computing convex combinations of pairs of training images and their corresponding labels,
+
+22
+
+thereby training the model to produce smooth and well-calibrated output probability distributions between class boundaries rather than learning sharp, memorised decision boundaries. The technique was grounded in the Vicinal Risk Minimisation principle, which proposes that models trained on examples in the vicinity of training data points rather than the
+training points themselves exhibit improved generalisation and robustness to distribution
+shift Zhang et al. (2018) demonstrated that MixUp training substantially improved model
+accuracy and robustness to label noise on standard image classification benchmarks. In
+the context of medical image classification, where degraded images may present ambiguous diagnostic features that do not clearly belong to either the positive or negative class,
+MixUp training provides a principled mechanism for improving model calibration and
+robustness. This technique was adopted in the present study for both the tuberculosis and
+malaria detection models, complementing the geometric and intensity-based augmentation pipeline.
+Despite the availability of these techniques, a significant gap remains in the literature. The majority of studies evaluating augmentation and domain adaptation strategies
+for medical image classification do so in well-resourced research environments using
+high-quality baseline images as the starting point for degradation simulation. Very few
+studies have evaluated the combined effect of multiple degradation-aware augmentation
+strategies, MixUp training, and transfer learning specifically within the context of mobile
+AI deployment for infectious disease diagnosis in sub-Saharan Africa. The present study
+addressed this gap by designing and evaluating an integrated robustness pipeline combining all three strategies for both the tuberculosis and malaria detection models, and by
+comparing model performance with and without this pipeline to quantify its contribution
+to diagnostic accuracy under simulated real-world deployment conditions.
+2.7 Mobile Artificial Intelligence and Model Optimisation
+The deployment of deep learning models on mobile devices presents a set of technical challenges that are fundamentally different from those encountered in server-based
+or cloud-based AI deployment. Mobile devices are characterised by limited computational processing power, constrained memory capacity, restricted battery life, and variable or absent internet connectivity. These constraints make it impractical to deploy the
+large, computationally intensive deep learning architectures that achieve state-of-the-art
+
+23
+
+performance on standard benchmarks directly on a smartphone without significant optimisation. The field of mobile AI, also referred to as on-device or edge AI, has therefore
+developed a range of model compression and optimisation techniques specifically designed to reduce the computational and memory requirements of deep learning models
+whilst preserving as much of their predictive accuracy as possible Xu et al. (2023).
+The MobileNetV2 architecture, introduced by Sandler et al. (2018) at the IEEE Conference on Computer Vision and Pattern Recognition, represents one of the most significant contributions to mobile AI and was the primary architectural choice for both the
+tuberculosis and malaria detection models developed in the present study. MobileNetV2
+builds upon the original MobileNet architecture by introducing two key innovations: inverted residual blocks and linear bottlenecks. In the inverted residual structure, the input
+and output of each residual block are thin, low-dimensional representations, whilst the
+intermediate expansion layer uses lightweight depthwise separable convolutions to filter
+features in a higher-dimensional space. This design is the inverse of the traditional residual block used in ResNet architectures, where the input and output are high-dimensional
+and the bottleneck is compressed. The linear bottleneck removes the non-linear activation
+function from the output of the bottleneck layer, preserving the representational power of
+the low-dimensional feature manifold Sandler et al. (2018) demonstrated that MobileNetV2 achieved state-of-the-art performance on the ImageNet classification benchmark and
+on object detection and semantic segmentation tasks whilst requiring substantially fewer
+multiply-add operations and parameters than comparable architectures, making it highly
+suitable for on-device inference on mobile hardware. The architecture has since become
+one of the most widely adopted backbones for mobile medical AI applications due to this
+combination of accuracy and computational efficiency.
+Model quantisation is the principal technique applied to further reduce the computational and memory footprint of a trained deep learning model for mobile deployment.
+Quantisation involves converting the floating-point numerical representations used during model training, typically 32-bit floating-point values, to lower-precision integer representations, most commonly 8-bit integers, for use during inference. This conversion
+reduces the model size by a factor of approximately four and accelerates inference by
+exploiting the efficiency of integer arithmetic operations on mobile processors, which
+are optimised for integer rather than floating-point computation Deng et al. (2020). Wu
+
+24
+
+et al. (2020) conducted a comprehensive empirical evaluation of integer quantisation for
+deep learning inference and demonstrated that post-training dynamic quantisation of convolutional neural networks could achieve near-baseline accuracy whilst reducing model
+size and improving inference latency by approximately three to four times on standard
+mobile benchmarks. The authors noted that MobileNet-family architectures were particularly well-suited to post-training quantisation due to their use of depthwise separable
+convolutions, which quantise with minimal accuracy degradation. Post-training dynamic
+quantisation was adopted in the present study for both the tuberculosis and malaria detection models, converting trained model weights from float32 to int8 precision prior to
+mobile deployment.
+TorchScript is the serialisation and compilation framework provided by the PyTorch
+deep learning library for exporting trained models to a platform-independent, self-contained
+format that can be executed independently of the Python runtime environment. The TorchScript format enables a trained PyTorch model to be loaded and executed directly within
+a mobile application written in Java or Kotlin for Android, or Swift for iOS, without
+requiring any Python dependencies on the device. The PyTorch Mobile framework,
+which provides the on-device inference runtime for TorchScript models, supports both
+Android and iOS platforms and includes the mobile optimiser utility, which applies a set
+of graph-level optimisations to the TorchScript model specifically targeting mobile inference performance, including operator fusion, memory layout optimisation, and removal
+of operations unnecessary for inference PyTorch Foundation (2023). The combination
+of post-training quantisation and TorchScript export with mobile optimisation constituted
+the model deployment pipeline adopted in the present study, enabling both the tuberculosis and malaria detection models to be embedded directly within the Flutter mobile
+application for on-device offline inference.
+The clinical relevance of on-device inference for mobile health applications in lowresource settings has been demonstrated by several studies. Kassim et al. Kassim et al.
+(2021) developed a deep learning platform for automated malaria screening from thin
+blood smear images that was specifically designed to operate exclusively on smartphone
+hardware without requiring internet connectivity, taking advantage of the widespread
+availability of low-end smartphones across the African continent. The authors demonstrated that a lightweight CNN model deployed on-device could achieve clinically ac-
+
+25
+
+ceptable accuracy for malaria screening whilst eliminating the dependence on cloud infrastructure that limits the deployability of many AI health tools in sub-Saharan Africa.
+This study provided direct evidence that on-device mobile AI deployment for infectious
+disease diagnosis in African healthcare settings was both technically feasible and clinically meaningful, and reinforced the architectural decisions made in the present study.
+Kirefu et al. (2021) conducted a scoping review of mobile health technologies for disease diagnosis and treatment support by health workers in sub-Saharan Africa, reviewing
+evidence from the inception of mobile health technology to April 2020. The review identified that the majority of mobile health applications used in the region relied on internet
+connectivity for data transmission and processing, and that the absence of offline functionality was consistently identified as a barrier to adoption in rural and low-connectivity
+environments. The authors concluded that the development of mobile health tools with
+robust offline functionality was a critical priority for improving healthcare delivery in
+sub-Saharan Africa. This conclusion directly motivated the hybrid offline and online architecture adopted in the present study, which ensures that AI-assisted diagnosis remains
+available to clinicians regardless of network availability.
+Despite these advances, significant gaps remain in the literature on mobile AI for
+healthcare in low-resource African settings. Existing studies have primarily evaluated
+single-disease mobile diagnostic tools and have not addressed the integration of multiple
+AI models, digital patient records, and clinical chat functionality within a single secure
+mobile application. Furthermore, no existing study has evaluated the performance differential between on-device quantised models and full-precision server-based models in the
+context of mobile health deployment, nor has any study developed a hybrid offline and online inference architecture that automatically selects between on-device and server-based
+inference based on network availability whilst flagging the source of each result to the
+clinician. These gaps constitute the technical contributions of the present study.
+2.8 Mobile Health Applications in Low-Resource Settings
+2.8.1 Overview of Mobile Health
+Mobile health, commonly abbreviated as mHealth, is defined by the World Health
+Organisation as medical and public health practice supported by mobile devices, such as
+mobile phones, patient monitoring devices, personal digital assistants, and other wireless
+
+26
+
+devices World Health Organisation (2011). More broadly, mHealth encompasses the use
+of mobile and wireless technologies to support health objectives, including the collection
+of community and clinical health data, the delivery of healthcare information to practitioners, researchers, and patients, the remote monitoring of patient vital signs, and the
+direct provision of care through mobile telemedicine platforms McCool et al. (2022). The
+emergence of mHealth as a distinct field of healthcare delivery has been driven by three
+converging forces: the rapid global proliferation of mobile devices, the continuous advancement of mobile application development frameworks, and the growing recognition
+that mobile technologies offer a uniquely scalable and cost-effective means of extending
+healthcare access to populations that are geographically or economically underserved by
+conventional health infrastructure.
+The global mHealth market was estimated at approximately 17.92 billion United
+States dollars in 2019 and was projected to grow at a compound annual growth rate of
+45% through to 2027, reflecting the scale of investment and interest in mobile health technologies across both high-income and low-income country contexts Grand View Research
+(2020). Applications of mHealth span a wide range of clinical and public health functions,
+including disease surveillance, treatment adherence support, remote patient monitoring,
+health worker training and communication, and AI-assisted diagnostic support. For the
+purposes of the present study, the most relevant application domain is AI-assisted clinical diagnosis and patient record management delivered through a mobile platform, with
+specific attention to the design requirements for deployment in low-resource settings characterised by unreliable internet connectivity.
+2.8.2 mHealth Adoption in Sub-Saharan Africa
+Sub-Saharan Africa represents both the region of greatest need for mHealth solutions
+and the region of most significant growth in mobile technology adoption. The combination of a disproportionately high disease burden, a severe shortage of healthcare workers,
+and rapidly increasing smartphone penetration creates a compelling context for mHealth
+deployment. Betjeman et al. Betjeman et al. (2013) demonstrated in an early review
+that mHealth applications in sub-Saharan Africa had shown consistent benefits in patient
+monitoring, medication adherence, and healthcare worker communication, particularly in
+rural areas where fixed health infrastructure was limited. These findings established a
+foundational evidence base for the potential of mHealth to bridge the healthcare access
+27
+
+gap in the region.
+More recent evidence confirms and extends these findings. Kirefu et al. Kirefu et al.
+(2021) conducted a scoping review of mobile health technologies for disease diagnosis
+and treatment support by health workers in sub-Saharan Africa and found that mHealth
+tools had improved the timeliness and accuracy of disease reporting, facilitated data collection and patient tracking, and supported clinical decision-making at the community
+health worker level. The review identified malaria, tuberculosis, HIV, and maternal health
+as the most common disease areas addressed by mHealth interventions in the region.
+Eze et al. Eze et al. (2023) conducted a further scoping review of current evidence on
+mHealth approaches in sub-Saharan Africa and found that whilst less than half of the 48
+sub-Saharan African countries were making substantive attempts to incorporate mHealth
+platforms into their formal health systems, rapid progress in both mobile infrastructure
+and mHealth-related research suggested that the conditions for wider scale-up of promising mHealth programmes were increasingly being met. The authors identified patients,
+caregivers, and healthcare workers as the typical end-user groups across reviewed studies,
+and noted that user-centred design was a consistent predictor of adoption success.
+Cameroon specifically has seen limited but growing engagement with mHealth solutions. The teleconsultation platform Waspito, discussed in detail in Section 2.12.3, represents the most prominent locally developed mHealth initiative, connecting patients with
+healthcare providers through digital channels. However, formal integration of mHealth
+tools into the national health system remains nascent, and the majority of peripheral health
+facilities in Cameroon continue to rely exclusively on paper-based record systems and
+manual diagnostic processes without digital support tools.
+2.8.3 Challenges of mHealth Deployment in Low-Connectivity Environments
+Despite the evident potential of mHealth in sub-Saharan Africa, the practical deployment of mobile health applications in low-resource settings encounters a consistent set of
+barriers that have limited adoption and sustained use. Aboye et al. Aboye et al. (2024)
+conducted a qualitative study assessing barriers and enablers of mHealth system adoption
+in sub-Saharan Africa from the perspectives of patients, physicians, and healthcare executives, and identified infrastructural barriers as the most significant category of impediment. These included poor or inefficient network systems, unreliable electricity supply,
+and insufficient device maintenance support. The authors noted that physicians specific28
+
+ally identified the absence of locally contextualised digital health systems and concerns
+about patients’ capacity to engage with mHealth tools as barriers to adoption, whilst patients identified the need for automated health monitoring tools as a key enabler.
+Omenka et al. Omenka et al. (2023) conducted a scoping review of healthcare workers’ perspectives on mHealth adoption in the developing world and similarly found that
+infrastructure-related barriers, particularly poor network coverage and unreliable power
+supply, were the most consistently reported impediments to sustained mHealth adoption.
+The review noted that financial costs associated with device ownership, data subscription, and application maintenance further constrained adoption, particularly among community health workers who frequently bore these costs personally. These findings are
+directly applicable to the deployment context of the present study in the North-West Region of Cameroon, where network coverage is intermittent, particularly in rural areas and
+in communities affected by the ongoing Anglophone crisis.
+McCool et al. McCool et al. (2022) reviewed the trajectory of mHealth in low- and
+middle-income countries and cautioned that the frequently cited optimism about the transformative potential of mobile technologies for health must be tempered by the persistent
+reality of infrastructural constraints, digital literacy gaps, and the tendency for mHealth
+programmes to remain in proof-of-concept or pilot stages without achieving sustained
+scale. The authors argued that future mHealth development in low-income country contexts must prioritise offline functionality, low-bandwidth operation, and contextually appropriate user interface design to achieve genuine impact.
+2.8.4 Offline-Capable Mobile Health Applications
+The design of offline-capable mobile health applications, sometimes referred to as
+offline-first applications, has emerged as a critical response to the connectivity challenges
+documented in the literature. An offline-first application is one that is designed to function fully without internet connectivity as its primary mode of operation, synchronising
+data with a central server only when connectivity becomes available. This design philosophy inverts the default assumption of internet connectivity that underlies most commercially developed mobile applications, replacing it with an assumption of intermittent
+or absent connectivity that better reflects the operational reality of healthcare settings in
+low-resource environments.
+Thambawita et al. Thambawita et al. (2022) demonstrated the practical value of the
+29
+
+offline-first design approach in a digital health record application deployed in a lowresource primary care setting, reporting that offline-first design substantially improved
+application reliability and user adoption by ensuring that clinical data could always be
+recorded regardless of network status, with automatic synchronisation occurring when
+connectivity was restored. The authors reported a median patient registration time of 76
+seconds and follow-up visit entry of 13 seconds, demonstrating that offline-first design
+was compatible with the time-constrained workflow of busy health facilities.
+The integration of on-device AI inference with offline-first data management represents the natural extension of this design approach to AI-assisted diagnostics. Kassim et al.
+Kassim et al. (2021) demonstrated that a deep learning model for malaria detection could
+be deployed directly on a smartphone to operate without any internet dependency, making AI-assisted diagnosis available in environments where cloud-based inference would
+be impractical. This study confirmed that the combination of model quantisation, lightweight architecture selection, and on-device inference was sufficient to deliver clinically
+acceptable diagnostic performance on standard Android smartphones without requiring
+specialised hardware.
+The hybrid offline and online architecture adopted in the present study builds directly
+on these foundations. By embedding quantised MobileNetV2 models within the Flutter mobile application for on-device inference and synchronising results with the Django
+backend server when connectivity is available, the system ensures that AI-assisted diagnosis of tuberculosis and malaria remains continuously available to clinicians regardless
+of network status. The hybrid approach further addresses the performance differential
+between on-device compressed models and full-precision server-based models by flagging the source of each diagnostic result to the clinician, ensuring transparency about the
+confidence level associated with each inference context.
+2.9 Digital Patient Record Systems in Sub-Saharan Africa
+2.9.1 Limitations of Paper-Based Patient Records
+The paper-based patient record, manifested in Cameroon and many other sub-Saharan
+African countries as a physical consultation booklet carried by the patient between health
+facilities, remains the predominant mechanism for documenting clinical encounters at the
+peripheral healthcare level. Whilst familiar and requiring no technological infrastructure,
+
+30
+
+paper-based record systems impose a consistent and well-documented set of limitations
+on the quality and continuity of healthcare delivery in low-resource settings.
+Mutia et al. (2025) identified the accuracy and comprehensiveness of medical data as
+the primary problems with paper-based systems in developing country healthcare contexts, noting that handwritten records are frequently incomplete, illegible, or inconsistently structured, making them unreliable as a basis for clinical decision-making. The
+consequences of this unreliability are clinically significant. When a patient presents at
+a health facility without their consultation booklet, or when the booklet has been lost or
+damaged, the attending clinician has no access to the patient’s medical history, previous
+diagnoses, or prior treatment records. This situation forces clinical decisions to be made
+on the basis of incomplete information, increasing the risk of diagnostic error, inappropriate treatment, and adverse drug interactions.
+The problem of data fragmentation is particularly acute in settings like the North-West
+Region of Cameroon, where patients frequently move between health facilities depending
+on proximity, availability of services, and the disruptions caused by the ongoing Anglophone crisis. Ibeneme et al. Ibeneme et al. (2023) noted that patient data in much of
+sub-Saharan Africa remains fragmented across facilities, programmes, and paper records,
+limiting the ability of clinicians to make informed decisions at the point of care and resulting in a system where clinical history is often incomplete, treatment pathways are difficult to track, and avoidable inefficiencies are built into everyday service delivery. The
+duplication of diagnostic tests resulting from unavailable prior records further imposes a
+measurable financial burden on health systems that can ill afford unnecessary expenditure.
+Beyond the clinical consequences, paper-based records impose operational burdens on
+health facilities in terms of physical storage requirements, retrieval time, and the risk of
+record loss or destruction through fire, flooding, or conflict-related damage, all of which
+are realistic threats in the healthcare context of the North-West Region of Cameroon.
+The transition to digital patient record systems has therefore been identified as a fundamental priority for improving healthcare delivery across sub-Saharan Africa Adeleke
+et al. (2025).
+2.9.2 Electronic Health Record Systems in Low-Resource Settings
+Electronic health record systems, defined as web-based or software-based computerised medical information systems that collect, store, and display patient information in a
+31
+
+paperless format accessible only to authorised personnel, have been widely recognised as
+the primary technological solution to the limitations of paper-based records Mohammed
+et al. (2025). The benefits of electronic health record adoption include improved data
+accuracy and completeness, enhanced continuity of care through longitudinal patient records accessible across facilities, support for clinical decision-making through structured
+data presentation, and the generation of aggregated health data for population-level surveillance and programme management Adeleke et al. (2025).
+Despite these acknowledged benefits, the penetration of electronic health record systems in sub-Saharan Africa remains low and highly uneven. Adeleke et al. Adeleke et al.
+(2025) conducted a comprehensive scoping review of a decade of electronic health record
+implementation in sub-Saharan Africa and found that whilst EHR systems had demonstrated significant benefits in improved data management, reduced errors, and enhanced
+clinical decision-making in the studies where they were successfully implemented, the
+majority of implementations had encountered persistent challenges related to limited infrastructure, financial constraints, data privacy concerns, and insufficient training of health
+personnel. The review identified unreliable electricity supply and inconsistent internet
+connectivity as the most commonly cited infrastructure barriers, followed by the absence
+of locally contextualised system design and the resistance of healthcare workers to adopting new technologies that disrupted established workflows.
+The dominance of HIV treatment programmes as the primary driver of electronic
+health record adoption in sub-Saharan Africa is a significant limitation of the existing
+evidence base Mwangi et al. (2014) noted that approximately 91% of reported electronic
+health record implementations in the region at that time were associated with HIV-related
+health centres, reflecting the influence of international funding programmes rather than
+systemic national digital health strategies. Whilst more recent implementations have begun to extend beyond HIV to other disease areas, the integration of electronic health
+records into the general primary and district hospital care workflow, which is the level
+targeted by the present study, remains an area of significant unmet need across the region,
+including in Cameroon.
+Large-scale electronic health record systems such as OpenMRS, which has been widely
+deployed across sub-Saharan Africa, offer comprehensive functionality but require significant technical infrastructure, dedicated server hardware, reliable connectivity, and
+
+32
+
+trained system administrators to deploy and maintain. These requirements place full-scale
+electronic health record implementation beyond the practical reach of most peripheral
+health facilities in low-resource environments, including district hospitals and health centres
+in Cameroon. This implementation gap between the demonstrated benefits of electronic
+health records and the practical feasibility of deploying existing systems at the peripheral
+healthcare level constitutes a significant unmet need that the digital patient record component of the present study sought to address.
+2.9.3 Mobile-Based Patient Record Solutions
+The recognition that full-scale electronic health record systems are impractical for
+many peripheral health facilities in sub-Saharan Africa has driven growing interest in
+lightweight, mobile-based patient record solutions that operate on smartphones without
+requiring dedicated server infrastructure or continuous internet connectivity. These solutions prioritise simplicity, offline functionality, and ease of use over the comprehensive
+data management capabilities of enterprise-level electronic health record systems, making them more accessible and sustainable in low-resource deployment environments.
+Thambawita et al. (2022) demonstrated the viability of this approach through the
+Simple application, a user-centred offline-first digital health record system designed for
+chronic disease management in low-resource settings. The application stored patient records locally on the device and synchronised with a central server when connectivity was
+available, achieving a median patient registration time of 76 seconds and a median followup visit entry time of 13 seconds. The system scaled to reach more than 11,400 primary
+care facilities in four countries with over three million patients enrolled, demonstrating
+that a lightweight, offline-first mobile record system could achieve substantial coverage
+in exactly the kind of low-resource environments that full-scale electronic health record
+systems had failed to penetrate. The authors attributed this success to the explicit prioritisation of simplicity, offline functionality, and user-centred design informed by extensive
+field testing with frontline health workers. Owotunde et al. (2021) developed and tested a
+lightweight mobile physician assistant system for low-resource areas in Nigeria that combined electronic medical record functionality with AI-assisted diagnostic support, storing
+patient data both locally on the device and in a cloud database, with encryption applied
+before transmission to ensure data security. The authors reported that surveyed physicians
+in Nigeria overwhelmingly used handwritten records at the time of the study, and that a
+33
+
+large majority expressed a preference for an Android-based application if one were made
+available. This finding confirmed that demand for mobile-based patient record solutions
+among healthcare workers in low-resource African settings was genuine and unmet by
+existing tools.
+The digital patient record component of the present study built directly on these foundations. Rather than attempting to deploy a full-scale electronic health record system, the
+study adopted a lightweight mobile-based approach in which patient demographic information, medical history, diagnosis results, AI-generated predictions, and doctor notes
+were stored in a structured local SQLite database on the device and synchronised with a
+PostgreSQL database on the central Django server when internet connectivity was available. Patients accessed their own records through the mobile application in a simplified
+view analogous to a digital consultation booklet, displaying their diagnosis history, doctor notes, and current health status in plain language without exposing technical model
+outputs or AI confidence scores. This design was explicitly motivated by the evidence
+reviewed in this section, which consistently identified simplicity, offline capability, and
+user-centred design as the critical determinants of adoption success for mobile health record solutions in low-resource African healthcare settings.
+2.10 Security in Mobile Health Applications
+2.10.1 Overview of Mobile Health Application Security
+The security of mobile health applications constitutes one of the most critical and
+frequently underaddressed dimensions of mHealth system design. Mobile health applications collect, store, transmit, and process sensitive patient health information, including
+demographic data, medical history, diagnostic results, and clinical notes, all of which
+constitute Protected Health Information that carries significant legal, ethical, and clinical
+consequences if exposed to unauthorised parties. Rezaee et al. (2023) conducted a comprehensive study to develop and validate a security assessment tool for mobile health
+applications and found that many existing mHealth applications provided an insecure
+infrastructure, with security consistently deprioritised by developers in favour of functionality and user experience. The study identified authentication weakness, inadequate
+data encryption, and insufficient access control as the most prevalent security deficiencies
+across reviewed mHealth applications.
+
+34
+
+The scale of the security risk in digital health is substantial and growing. Hariri et al.
+(2025) documented that healthcare data breaches in 2023 alone involved 712 major incidents affecting over 87.2 million patient records, with an average cost of 429 United
+States dollars per breached record, compared to 164 dollars across all other industries.
+The authors reported that biometric authentication systems had demonstrated unauthorised access reductions of up to 68% compared to conventional password-based methods,
+underscoring the clinical and operational case for robust authentication in healthcare mobile applications. For the present study, which handles patient diagnostic data and medical
+records in a resource-constrained environment where devices may be shared or accessed
+by multiple individuals, robust security design was not an optional enhancement but a
+fundamental design requirement.
+The security architecture of the present study was therefore designed around two distinct and complementary security layers. The first layer, implemented at the application
+level through JWT-based authentication and role-based access control, governs which
+users are permitted to access the system and what data and functions they are authorised
+to use. The second layer, implemented at the device level through biometric and PIN
+authentication, governs physical access to the application on the device itself, ensuring
+that unauthorised individuals cannot access the system even if they gain possession of the
+device.
+2.10.2 Authentication and Authorisation Frameworks
+Authentication refers to the process of verifying the identity of a user attempting to
+access a system, whilst authorisation refers to the process of determining what resources
+and functions that verified user is permitted to access. In the context of mobile health
+applications, both processes must be implemented robustly to protect patient data from
+unauthorised access whilst remaining sufficiently usable to avoid impeding clinical workflows under time pressure. Alhammad et al. (2024) conducted a systematic review of patients’ perspectives on data confidentiality, privacy, and security in mHealth applications
+and found that authentication concerns were the most frequently cited security issue, with
+patients expressing particular concern about the risk of unauthorised access to their health
+information by third parties, including other household members sharing the same device.
+Modern mobile health applications employ a range of authentication mechanisms
+ranging from simple username and password combinations to multi-factor authentica35
+
+tion schemes combining knowledge factors, possession factors, and biometric factors.
+The consensus in recent security literature is that username and password authentication
+alone is insufficient for applications handling sensitive health data, and that at minimum
+a second authentication factor should be implemented to reduce the risk of credential
+compromise Aljedaani et al. (2021). The present study implemented a two-factor authentication architecture comprising application-level JWT-based credential verification as the
+first factor and device-level biometric or PIN verification as the second factor, providing
+layered protection against both remote credential attacks and physical device access by
+unauthorised individuals.
+2.10.3 JSON Web Token Authentication
+JSON Web Token, standardised as RFC 7519, is an open standard for securely transmitting information between two parties as a compact, URL-safe, digitally signed JSON
+object. A JWT consists of three components: a header specifying the token type and cryptographic signing algorithm, a payload containing claims about the authenticated user including their identity and role, and a cryptographic signature generated by combining the
+encoded header and payload with a secret key held by the server Syofian et al. (2024). The
+signature ensures that the token cannot be tampered with in transit, as any modification to
+the header or payload would invalidate the signature when verified by the server.
+JWT-based authentication is stateless, meaning that the server does not maintain a
+session store or database lookup table for authenticated users. Instead, the client application stores the JWT after successful login and includes it in the authorisation header of
+every subsequent API request. The server verifies the JWT signature on each request and
+extracts the user identity and role from the payload without requiring any database query,
+making JWT authentication particularly well-suited to mobile applications that communicate with a backend server via REST API Syofian et al. (2024). This stateless design
+reduces server-side complexity, improves scalability, and is compatible with offline-first
+architectures in which the client application must continue to function without continuous
+server communication.
+In the present study, JWT authentication was implemented between the Flutter mobile
+application and the Django REST backend. Upon successful login with valid credentials,
+the backend issued a signed JWT containing the user’s identity, role (doctor or patient),
+and token expiry timestamp. This token was stored securely on the mobile device and in36
+
+cluded in the authorisation header of all subsequent API requests. Expired tokens required
+re-authentication, limiting the window of risk in the event of token compromise. This approach is consistent with industry best practices for securing REST API communication
+in mobile health applications.
+2.10.4 Role-Based Access Control
+Role-Based Access Control is an access control model in which permissions to access system resources and functions are assigned to predefined roles rather than to individual users, and users are granted permissions by being assigned to one or more roles.
+Sandhu et al. Sandhu et al. (1996) introduced the foundational RBAC model, which has
+since become one of the most widely adopted access control paradigms in enterprise and
+healthcare information systems. In a healthcare context, RBAC enables the enforcement
+of the principle of least privilege, whereby each user is granted access only to the data and
+functions necessary for their specific clinical or administrative role, minimising the risk of
+inadvertent or malicious access to sensitive patient information beyond what is required
+for legitimate clinical purposes.
+Implementing Role-Based Access Control for healthcare applications has been identified as a critical security best practice in the literature, particularly for systems that serve
+multiple user types with fundamentally different data access requirements Rathi et al.
+(2025). In the present study, two primary roles were defined: the doctor role and the
+patient role. Users assigned the doctor role were granted access to all patient records
+registered within the system, the AI-assisted diagnostic interface, the AI clinical chat feature, and the ability to add diagnostic notes to patient records. Users assigned the patient
+role were granted access exclusively to their own health record, including their personal
+information, diagnosis history, and doctor notes, without access to any other patient’s data,
+the diagnostic AI interface, or the AI chat. This strict role separation ensured that patient
+data privacy was maintained by design rather than by policy alone, making unauthorised
+cross-patient data access architecturally impossible regardless of user behaviour.
+2.10.5 Biometric and PIN-Based Device Security
+Whilst application-level authentication controls access to the system through credential verification, a complementary layer of device-level security is necessary to protect
+patient data in the event that an authenticated user’s mobile device is physically accessed
+37
+
+by an unauthorised individual. In clinical environments, where a doctor’s device may be
+set down during a consultation or a patient’s phone may be used by a family member,
+the risk of unauthorised device access is real and practically significant. This risk is particularly relevant in the healthcare settings targeted by the present study, where devices
+are frequently carried by clinicians between multiple patient consultations throughout the
+day.
+Biometric authentication, encompassing fingerprint recognition and facial recognition, provides a highly usable and highly secure mechanism for device-level access control
+in mobile health applications. Hariri et al. (2025) reported that fingerprint recognition was
+the most widely adopted biometric modality in healthcare applications, used in 62% of
+healthcare biometric implementations, followed by facial recognition at 19%. The authors
+demonstrated that biometric authentication systems reduced unauthorised access rates by
+up to 68% compared to password-based systems, whilst simultaneously improving user
+experience by eliminating the need to enter passwords at each access event. Aljedaani et
+al. Aljedaani et al. (2021) further noted in their empirical study of mHealth user security
+preferences that users strongly desired biometric authentication and perceived it as positively impacting security without significantly compromising usability, a critical balance
+in time-constrained clinical environments.
+In the present study, device-level biometric and PIN authentication was implemented using the local authentication framework available natively in Flutter through the
+local_auth package, which provides access to the operating system’s built-in fingerprint
+and face recognition APIs on both Android and iOS devices without requiring the transmission of any biometric data to the server or to external services. After the initial
+application-level JWT login, the application required biometric or PIN verification each
+time it was opened or brought from the background, ensuring that only the authenticated
+device owner could access the application in normal use. This implementation maintained
+full biometric processing on-device, preserving patient privacy by ensuring that biometric
+data never left the user’s device.
+
+38
+
+2.11 Software Development Life Cycle Models
+2.11.1 Overview of Software Development Life Cycle
+The Software Development Life Cycle refers to a structured process that defines the
+phases, activities, and tasks involved in planning, designing, developing, testing, deploying, and maintaining a software system. The primary purpose of the SDLC is to minimise
+the risk of project failure and maximise the quality of the delivered software product by
+providing a systematic and repeatable framework that guides the development team from
+the initial definition of requirements through to the final delivery and maintenance of the
+system Gurung et al. (2020). Without a structured SDLC framework, software development is prone to cost overruns, schedule slippage, scope creep, and the delivery of systems
+that do not meet user requirements or quality standards.
+Numerous SDLC models have been proposed in the software engineering literature,
+each offering a different approach to organising and sequencing the activities of the development process. The most widely reviewed models in academic and professional contexts
+include the Waterfall model, the Spiral model, the Iterative model, and the Agile methodology. Each model has distinct characteristics, strengths, and limitations that determine its
+suitability for different project types, team sizes, and operating conditions. The following
+subsections present a review of each of these models before justifying the selection of the
+Agile methodology for the present study.
+2.11.2 Waterfall Model
+The Waterfall model is the earliest and most widely recognised formalised SDLC
+model, characterised by a strictly sequential linear flow of development activities in which
+each phase must be completed in full before the subsequent phase begins. The standard
+phases of the Waterfall model are requirements gathering, system design, implementation,
+testing, deployment, and maintenance, each of which produces a defined set of deliverables that serve as the input to the next phase Sommerville (2016). The model takes its
+name from the unidirectional flow of progress from one phase to the next, analogous to
+water flowing downward over a series of steps.
+The principal advantage of the Waterfall model lies in its simplicity and clarity. Because all requirements are defined and documented at the outset of the project, the development timeline and resource requirements can be estimated with relative precision,
+
+39
+
+and the sequential structure makes it straightforward to track progress and assign responsibilities across the development team. The model is well-suited to projects with clearly
+defined, stable, and comprehensively understood requirements that are unlikely to change
+substantially during development Gurung et al. (2020).
+However, the Waterfall model imposes a fundamental limitation in the form of its inflexibility in the face of changing requirements. Because the requirements phase precedes
+all subsequent phases and the model does not accommodate revisiting earlier phases once
+they are complete, any change to requirements discovered during implementation or testing necessitates restarting the development process from an earlier stage, incurring significant cost and schedule penalties. This rigidity makes the Waterfall model poorly suited
+to projects characterised by evolving requirements, uncertain technical feasibility, or the
+need for iterative refinement based on user feedback, all of which are characteristic of AIbased healthcare software development. Furthermore, the deferral of all testing activities
+to the post-implementation phase means that defects and design flaws are discovered late
+in the development cycle when they are most costly to rectify.
+2.11.3 Spiral Model
+The Spiral model was introduced by Boehm (1988) as a risk-driven alternative to the
+linear sequential approach of the Waterfall model. The model represents the software development process as a series of iterative cycles, or spirals, each of which passes through
+four quadrants: objective setting, risk assessment and reduction, development and validation, and planning for the next cycle. Each completed spiral represents one phase of
+the overall development process, with the product progressively elaborated and refined
+through successive iterations.
+The defining characteristic of the Spiral model is its explicit emphasis on risk identification and mitigation at each iteration. Before proceeding to development in each spiral,
+the team conducts a structured risk assessment to identify the most significant technical,
+schedule, and requirement risks facing the project, and takes deliberate steps to reduce
+those risks before committing to further development. This risk-driven approach makes
+the Spiral model particularly appropriate for large, complex, high-stakes software projects
+where the cost of late-stage failure is severe Boehm (1988).
+The primary limitations of the Spiral model are its complexity and the high level
+of risk management expertise required to apply it effectively. The model demands that
+40
+
+the development team be proficient in formal risk identification and quantification techniques, which may not be readily available in all development contexts. Furthermore, the
+overhead associated with the risk assessment activities at each spiral can be substantial,
+making the model poorly suited to smaller projects or teams with limited resources and
+time. For the present study, which was conducted by a single researcher within a constrained time frame, the full rigour of the Spiral model’s risk management process was
+not practically feasible.
+2.11.4 Iterative Model
+The Iterative model, also referred to as the Iterative and Incremental model, addresses
+the inflexibility of the Waterfall model by decomposing the overall development process
+into a series of short development cycles, each of which produces a working increment
+of the software system. Development begins with the implementation of a partial set of
+requirements, and each subsequent iteration adds functionality, refines existing features,
+or addresses defects identified during the previous cycle, progressively building toward
+the complete system Sommerville (2016).
+The Iterative model offers several advantages over the Waterfall model for projects
+with evolving or incompletely understood requirements. By delivering working software increments at regular intervals, the model enables early detection of requirement
+misunderstandings, design flaws, and technical feasibility problems, all of which can be
+addressed in subsequent iterations before they accumulate into costly late-stage failures.
+User and stakeholder feedback can be incorporated between iterations, ensuring that the
+delivered system progressively aligns more closely with actual user needs. However, the
+Iterative model does not provide an explicit framework for managing the overall project
+scope, team collaboration, or the prioritisation of requirements across iterations, which
+can lead to scope creep and uncontrolled expansion of the project if not carefully managed.
+2.11.5 Agile Methodology
+The Agile methodology is a family of iterative and incremental software development
+approaches united by the values and principles articulated in the Agile Manifesto, published by Beck et al. (2001). The Manifesto prioritises individuals and interactions over
+processes and tools, working software over comprehensive documentation, customer col41
+
+laboration over contract negotiation, and responding to change over following a plan.
+These values represent a fundamental departure from the document-driven, plan-driven
+philosophy of traditional SDLC models such as the Waterfall model, emphasising adaptability, continuous delivery, and active stakeholder engagement as the primary drivers of
+successful software development.
+In practice, Agile development is organised around short, time-boxed development
+cycles called sprints, typically lasting between one and four weeks. At the beginning of
+each sprint, the development team selects a prioritised set of features or user stories from
+the product backlog and commits to delivering a working, tested increment of the system
+by the end of the sprint. Each sprint concludes with a review in which the delivered
+increment is demonstrated to stakeholders and a retrospective in which the team reflects
+on and improves its development process. This cycle repeats until the product backlog is
+exhausted or the system meets the required acceptance criteria.
+The application of Agile methodology to healthcare software development has been
+the subject of growing research interest. Kokol et al. (2022) conducted a synthetic scoping review of Agile software development in healthcare and found that Agile adoption in
+healthcare software projects had grown exponentially over the reviewed period, with citation counts increasing from 13 in 2008 to 394 in 2022, reflecting the broad recognition of
+Agile’s suitability for the complex, evolving, and user-centred requirements of healthcare
+system development. The review identified four primary research themes in the literature:
+the adaptation of Agile practices to regulatory compliance requirements, the integration
+of user-centred design within Agile workflows, the application of Agile to mobile health
+application development specifically, and the use of Agile for the deployment of machine
+learning models in clinical settings.
+The specific application of Agile methodology to machine learning system development in healthcare was addressed by Gaines et al. Gaines et al. (2021), who demonstrated
+that Agile development practices were well-suited to the iterative nature of machine learning model training, evaluation, and refinement. The authors described how sprint-based
+development enabled the team to progressively improve model performance through successive iterations of data preprocessing, architecture selection, hyperparameter tuning,
+and evaluation, with each sprint delivering a measurable improvement in model metrics.
+This iterative approach is directly analogous to the model development process followed
+
+42
+
+in the present study, where each CNN training run produced measurable outcomes that
+informed subsequent decisions about augmentation strategies, learning rates, and model
+architecture modifications.
+2.11.6 Justification for Agile in the Present Study
+The selection of the Agile methodology as the SDLC framework for the present study
+was informed by the specific characteristics of the project and the limitations of the alternative models reviewed above.
+The Waterfall model was considered and rejected on the grounds that the requirements
+of an AI-based mobile healthcare system cannot be comprehensively and definitively specified at the outset of the project. The performance of the CNN models for tuberculosis
+and malaria detection, the specific augmentation parameters required for robustness to degraded images, the optimal architecture configuration for on-device deployment, and the
+precise data structures required for the digital patient record system were all subject to
+empirical discovery through iterative experimentation during the development process. A
+sequential model that required all requirements to be fixed before implementation began
+would have been fundamentally incompatible with this research-driven development context.
+The Spiral model was considered and rejected on practical grounds. Whilst its riskdriven approach has conceptual merit for a project involving novel AI deployment in a
+clinical context, the formal risk quantification and management overhead of the Spiral
+model was not feasible for a single-researcher Master’s dissertation project conducted
+within a constrained time frame.
+The Agile methodology was selected because it accommodated the iterative and empirical nature of the project across all of its components. For the AI model development component, successive sprints enabled the progressive refinement of preprocessing
+pipelines, augmentation strategies, and model architectures based on measured performance outcomes. For the mobile application development component, iterative sprint cycles
+enabled the progressive delivery and testing of individual system features, including authentication, patient record management, AI diagnostic integration, and the AI chat interface, with each sprint producing a testable increment of the application. For the system
+integration component, Agile’s emphasis on continuous integration and early testing enabled compatibility issues between the mobile application, backend API, and AI models
+43
+
+to be identified and resolved progressively rather than at the end of the development cycle.
+Furthermore, Odera et al. (2023) demonstrated that the Agile methodology offered
+significant advantages specifically for AI-enabled mobile health applications, including
+the ability to incorporate ethical considerations iteratively throughout the development
+lifecycle rather than as a retrospective activity, and the facilitation of community and
+clinician involvement in the design process through regular sprint reviews. These advantages were particularly relevant to the present study, where the clinical safety and ethical
+appropriateness of the AI diagnostic tool were ongoing design considerations throughout
+the development process rather than post-hoc compliance activities.
+2.12 Existing AI-Based Healthcare Systems
+2.12.1 Ada Health
+Ada Health is a mobile AI-powered symptom assessment application founded in Berlin in 2011 and currently available in over 130 countries. The application uses a large
+medical knowledge base and a probabilistic inference engine to evaluate user-reported
+symptoms and generate a ranked list of possible conditions, along with recommendations
+for the appropriate level of care to seek Khanna et al. (2024). A peer-reviewed study published in BMJ Open demonstrated that Ada Health achieved accuracy levels approaching
+those of human general practitioners in standardised clinical vignette testing, outperforming most other commercially available symptom checkers Gilbert et al. (2020).
+However, Ada Health presents several critical limitations relative to the requirements
+of the present study. The system relies exclusively on patient-reported symptoms and
+does not incorporate medical imaging, laboratory data, or any form of clinical diagnostic
+analysis. The application is designed for patient self-assessment rather than clinical decision support, and therefore does not address the needs of healthcare providers requiring AI-assisted interpretation of diagnostic images. Furthermore, Ada Health requires
+continuous internet connectivity to function, has no offline capability, does not maintain
+longitudinal patient records accessible to healthcare providers, and provides no facility
+for doctor-patient communication or AI-assisted clinical chat. These limitations collectively render Ada Health unsuitable as a model for deployment in low-resource peripheral
+healthcare settings in Cameroon.
+
+44
+
+2.12.2 Babylon Health
+Babylon Health was a United Kingdom-based AI health service founded in 2013 that
+combined symptom checking, telemedicine consultations, and AI-assisted clinical decision support within a single platform. The company’s AI system achieved notable performance on standardised diagnostic benchmarks, with a peer-reviewed study published
+in Nature Communications demonstrating that Babylon’s causal machine learning approach outperformed 72% of general practitioners on written diagnostic test cases Richens
+et al. (2020). The platform was deployed in Rwanda as Babyl in partnership with the Bill
+and Melinda Gates Foundation, reaching over two million members by 2018.
+Despite these achievements, Babylon Health encountered critical limitations in its
+African deployment. At the time of its Rwanda launch, the Babylon AI system did not include tuberculosis or malaria among the conditions it could diagnose, representing a fundamental gap relative to the disease burden of the deployment context Wikipedia (2024).
+The platform required stable internet connectivity and was not designed for offline operation. Babylon Health entered bankruptcy in 2023 and ceased operations, underscoring
+the sustainability challenges facing AI health platforms that are not designed with the
+operational realities of low-resource environments as a primary consideration.
+2.12.3 Waspito
+Waspito is a Cameroonian digital health platform founded in 2020 that provides instant video teleconsultation between patients and verified doctors, mobile laboratory sample
+collection, pharmacy services, and a health-focused social network. By 2023, the platform
+had reached over 650,000 users in Cameroon and Ivory Coast, onboarded 950 doctors, and
+facilitated over 60,000 consultations, raising a total of 5.2 million United States dollars
+in funding People of Color in Tech (2023). Waspito represents the most advanced locally developed digital health initiative in Cameroon and demonstrates the feasibility and
+demand for mobile health services in the Cameroonian context.
+However, Waspito does not incorporate AI-based diagnostic capabilities of any kind.
+The platform facilitates human doctor consultations remotely but does not provide AIassisted analysis of medical images, automated disease detection, or clinical decision
+support for healthcare providers working in facilities without specialist access. The platform also requires reliable internet connectivity for its core teleconsultation functionality
+
+45
+
+and does not maintain structured longitudinal patient records accessible to healthcare providers across different facilities. These limitations mean that Waspito does not address the
+diagnostic support needs of district hospitals and health centres in the North-West Region
+of Cameroon where connectivity is unreliable and specialist teleconsultation may not be
+feasible.
+2.12.4 Research-Based AI Diagnostic Tools
+Beyond commercial platforms, a substantial body of research has demonstrated the
+technical feasibility of deep learning for infectious disease diagnosis specifically relevant to the Cameroonian context. Deep learning models for tuberculosis detection from
+chest X-rays, as reviewed in Section 2.4, have achieved near-expert diagnostic performance on benchmark datasets. Similarly, CNN-based models for malaria detection from
+blood smear images, as reviewed in Section 2.5, have demonstrated high accuracy under
+controlled conditions. However, these research-based systems share a consistent set of
+limitations: they address single diseases in isolation, they have been validated exclusively
+on high-quality benchmark datasets without accounting for real-world image degradation,
+they have not been integrated into mobile platforms with offline capability, and they have
+not been combined with patient record management or clinical decision support features
+within a unified system Santosh et al. (2022); Yusuf et al. (2024).
+2.12.5 Comparative Summary of Existing Systems
+The comparison presented in the table below confirms that no existing system simultaneously addresses all of the following requirements: AI-assisted image-based diagnosis
+for malaria and tuberculosis, offline operational capability, longitudinal digital patient records, role-based access for doctors and patients, and a patient-aware AI clinical chat
+feature within a single secure mobile application designed for low-resource deployment.
+The present study was specifically designed to address this combination of unmet requirements within the healthcare context of Cameroon.
+
+46
+
+Table 2.1: Comparative Summary of Existing AI-Based Healthcare Systems
+Feature
+
+Ada
+
+Babylon
+
+Health
+
+Health
+
+Symptom
+
+Symptom +
+
+Capability
+
+only
+
+AI
+
+Image-Based
+
+No
+
+No
+
+Offline Support
+
+No
+
+Patient Records
+Doctor-Patient
+
+AI
+
+Diagnostic
+
+Waspito
+
+Research
+
+Proposed
+
+AI Tools
+
+System
+
+Single dis-
+
+TB + Mal-
+
+ease
+
+aria
+
+No
+
+Yes
+
+Yes
+
+No
+
+No
+
+N/A
+
+Yes
+
+No
+
+Yes
+
+No
+
+No
+
+Yes
+
+No
+
+Yes
+
+Yes (video)
+
+No
+
+Yes
+
+None
+
+Diagnosis
+
+Communication
+
+(telemedi-
+
+(AI
+
+chat)
+
+cine)
+Low-Resource
+
+No
+
+No
+
+No
+
+No
+
+Yes
+
+General
+
+General
+
+General
+
+Single
+
+TB + Mal-
+
+Deployment
+Disease Focus
+
+aria
+2.13 Research Gap
+The review of existing literature presented in this chapter reveals that whilst significant
+progress has been made in the application of artificial intelligence to healthcare delivery,
+medical image analysis, mobile health systems, and digital patient record management,
+a substantial and clearly defined gap exists between the current state of knowledge and
+the practical requirements of AI-assisted clinical diagnosis and patient management in
+low-resource healthcare settings such as Cameroon.
+The first identified gap concerns the domain specificity and robustness of existing AI
+diagnostic models. As demonstrated in Sections 2.4 and 2.5, convolutional neural network
+models for tuberculosis detection from chest X-rays and malaria detection from blood
+smear images have achieved high diagnostic accuracy under controlled benchmark conditions. However, Santosh et al. (2022) and Yusuf et al. (2024) independently identified that
+the overwhelming majority of published models were trained and evaluated exclusively
+on high-quality datasets collected under controlled imaging conditions and had not been
+evaluated for robustness to the image degradation and domain shift that characterise real-
+
+47
+
+world clinical imaging in low-resource settings. Sendra-Balcells et al. (2023) confirmed
+that this generalisation failure was a documented and persistent problem for AI medical
+imaging systems deployed in African healthcare contexts. No existing study has systematically evaluated the combined effect of domain-shift-aware data augmentation, MixUp
+training, and transfer learning as an integrated robustness pipeline for both tuberculosis
+and malaria detection models intended for deployment in peripheral health facilities in
+Cameroon.
+The second identified gap concerns the mobile optimisation of medical AI models for
+low-connectivity African healthcare environments. As reviewed in Section 2.7, whilst
+model quantisation and TorchScript-based mobile deployment have been demonstrated
+for individual diagnostic tasks, no existing study has developed and evaluated a complete
+mobile optimisation pipeline for both a tuberculosis detection model and a malaria detection model within a single hybrid offline and online application architecture. Kirefu et al.
+(2021) identified the absence of offline functionality as the most consistently reported barrier to mHealth adoption in sub-Saharan Africa, yet the majority of existing AI-assisted
+diagnostic tools reviewed in Section 2.12 require continuous internet connectivity for their
+core functionality, rendering them fundamentally unsuitable for deployment in the NorthWest Region of Cameroon where connectivity is unreliable.
+The third identified gap concerns the integration of AI-assisted diagnosis with digital
+patient record management and clinical decision support within a single unified mobile
+platform. As reviewed in Section 2.12, existing systems address these requirements in
+isolation. Ada Health provides symptom-based assessment without imaging capability,
+offline support, or patient records. Babylon Health combined AI with telemedicine but
+lacked image-based diagnosis, offline capability, and did not address the specific diseases of highest burden in Cameroon. Research-based AI diagnostic tools address single
+diseases without integration into broader clinical workflows. Waspito provides teleconsultation and limited patient connectivity but incorporates no AI diagnostic capability.
+No existing system integrates AI-assisted medical image diagnosis for both malaria and
+tuberculosis, longitudinal digital patient records accessible to both doctors and patients,
+a patient-aware AI clinical chat feature for clinical decision support, and a hybrid offline
+and online architecture within a single secure mobile application.
+The fourth identified gap concerns the security architecture of mobile health applic-
+
+48
+
+ations in low-resource settings. As reviewed in Section 2.10, whilst the importance of
+robust authentication and access control in mHealth applications is well-established in
+the literature, and biometric authentication has been demonstrated to substantially reduce
+unauthorised access rates in clinical settings, the majority of mHealth systems reviewed
+in Section 2.12 do not implement two-layer security combining application-level JWT
+authentication with device-level biometric verification. This is a particularly significant
+omission in the context of applications that handle sensitive patient diagnostic data in environments where devices may be shared or physically accessed by multiple individuals.
+The fifth identified gap concerns the contextual appropriateness of existing AI health
+systems for Cameroonian healthcare delivery specifically. As reviewed in Sections 2.1
+and 2.8, AI systems designed for high-resource environments consistently underperform
+in low-resource deployment contexts due to data quality variability, infrastructure constraints, and the absence of locally representative training data. The Anglophone crisis
+documented in Section 1.1 has further reduced healthcare access in the North-West Region, creating an acute and specific need for a system that functions reliably under conditions of degraded connectivity, limited equipment quality, and reduced specialist availability. No existing system has been specifically designed to address the combined healthcare
+delivery challenges of the Cameroonian peripheral health system.
+Based on these five identified gaps, the present study addressed a clearly defined and
+practically significant research problem by designing and developing a mobile artificial
+intelligence system that integrated robust CNN-based diagnosis for malaria and tuberculosis, domain-shift-aware model training for real-world deployment conditions, mobile
+model optimisation for hybrid offline and online inference, digital patient record management, patient-aware AI clinical chat support, and a two-layer security architecture, within
+a single unified application tailored to the operational realities of low-resource healthcare
+delivery in Cameroon. Table 2.2 below provides a structured mapping of the identified
+research gaps to the specific objectives of the present study.
+
+49
+
+Table 2.2: Mapping of Identified Research Gaps to Specific Study Objectives
+Research Gap
+
+Corresponding
+
+Spe-
+
+cific Objective
+Lack of robustness of TB detection CNNs to real-world
+
+Specific Objective 1
+
+image degradation
+Lack of robustness of malaria detection CNNs to phone-
+
+Specific Objective 2
+
+captured microscopy domain shift
+Absence of mobile-optimised hybrid offline/online AI
+
+Specific Objective 3
+
+deployment for low-connectivity African healthcare
+Absence of integrated AI diagnosis, digital patient re-
+
+Specific Objective 4
+
+cords, AI chat, and two-layer security in a single
+mHealth platform
+No AI-assisted clinical system designed specifically for
+
+All objectives collect-
+
+low-resource healthcare delivery in Cameroon
+
+ively
+
+50
+
+CHAPTER THREE
+MATERIALS AND METHODS
+3.1 Introduction
+This chapter presents the materials and methods employed in the design and development of a mobile artificial intelligence system for clinical diagnosis support and patient
+management in low-resource healthcare settings. The chapter is organised to correspond
+directly with the four specific objectives of the study. It begins with an overview of
+the proposed system and the software development methodology adopted, followed by
+a description of the system requirements, system design, dataset preparation, AI model
+development, mobile optimisation strategy, system implementation, and evaluation methodology. All design decisions presented in this chapter were informed by the findings of
+the literature review presented in Chapter 2 and were guided by the operational realities
+of peripheral healthcare delivery in the North-West Region of Cameroon.
+3.2 System Overview
+The proposed system is a mobile-based artificial intelligence platform designed to
+support clinical diagnosis and patient management in low-resource healthcare settings.
+The system integrates two deep learning models for disease detection, a digital patient
+record component, and a patient-aware AI clinical chat feature within a single secure
+mobile application deployable on Android and iOS devices.
+The system consists of four principal layers. The first is the mobile application
+layer, developed using Flutter, which serves as the primary interface for both doctors
+and patients. The second is the backend layer, implemented using Django REST Framework, which manages authentication, data storage, API communication, and coordination
+between system components. The third is the database layer, comprising a PostgreSQL
+database hosted on the server for persistent storage and a SQLite database embedded on
+the mobile device for offline data management. The fourth is the AI processing layer,
+which consists of the tuberculosis detection model, the malaria detection model, and the
+AI chat interface powered by a large language model API. The overall architecture of the
+system, showing all four layers and their interconnections, is illustrated in Figure 3.1.
+As shown in Figure 3.1, the four layers communicate through well-defined interfaces.
+
+51
+
+Figure 3.1: Overall System Architecture of the Proposed Mobile AI Healthcare System
+The mobile application layer interacts with the backend layer exclusively through secured
+REST API calls authenticated via JSON Web Tokens. The backend layer coordinates with
+the database layer for all data persistence and retrieval operations. The AI processing
+layer receives requests from the backend and returns diagnostic predictions and confidence scores. The on-device inference module in the mobile application layer communicates directly with the quantised AI models embedded within the application, bypassing
+the backend entirely when internet connectivity is unavailable.
+The system operates in a hybrid offline and online mode. When internet connectivity
+is available, diagnostic inference is performed by the full-precision models hosted on
+the Django backend server. When connectivity is unavailable, inference is performed
+locally on the device using quantised and TorchScript-optimised versions of both models
+embedded within the Flutter application. Results generated in offline mode are stored
+locally in SQLite and synchronised to the server when connectivity is restored. Each
+diagnostic result is flagged to indicate whether it was generated by the on-device model
+or the server model, ensuring transparency for the clinician. The complete flow of data
+through the system during a diagnostic session is illustrated in Figure 3.2.
+
+52
+
+System Data
+
+Flow Diagram
+As shown in Figure 3.2, the data flow begins when the doctor inputs patient data and
+uploads a diagnostic image through the mobile application. The application first checks
+for internet connectivity. If connectivity is available, the request is transmitted to the
+Django backend via the REST API, where it is routed to the full-precision AI model for
+
+53
+
+inference. The resulting prediction, confidence score, and WHO-guided next-step recommendation are returned to the mobile application and displayed to the doctor. If connectivity is unavailable, the request is routed directly to the on-device quantised model, and the
+result is stored temporarily in the SQLite database and flagged as an offline result. Upon
+restoration of connectivity, all pending offline results are automatically synchronised to
+the PostgreSQL server database. In both cases, the final result is saved to the patient
+record and made available for future reference.
+3.3 Software Development Methodology
+3.3.1 Overview
+The development of the proposed system required a structured software development
+methodology capable of accommodating the iterative and research-driven nature of the
+project. As reviewed in Section 2.11, several established software development life cycle
+models were considered, including the Waterfall model, the Spiral model, and the Iterative model. Following a comparative evaluation of these models against the specific
+characteristics and constraints of the present project, the Agile methodology was selected
+as the most appropriate framework, for the reasons detailed in Section 2.11.6.
+3.3.2 Application of Agile to the Present Study
+The Agile methodology was applied through a series of five time-boxed sprints, each
+of approximately two to three weeks duration. At the beginning of each sprint, a set
+of prioritised tasks was selected from the overall project backlog and committed to for
+delivery by the end of the sprint. Each sprint concluded with a review of the delivered
+increment against predefined acceptance criteria, and findings from the review informed
+the planning of the subsequent sprint. This iterative cycle ensured that design decisions,
+model performance outcomes, and system testing results were continuously fed back into
+the development process rather than deferred to a single end-of-project evaluation phase.
+The five sprints and their primary deliverables are summarised in Figure 3.3 and described as follows.
+Sprint 1 covered system requirements definition, architecture design, database schema
+design, and the preparation of the development environment. The primary deliverable
+of Sprint 1 was a fully documented system design, including all UML diagrams and the
+confirmed technology stack, which served as the blueprint for all subsequent development
+54
+
+activities.
+Sprint 2 covered dataset acquisition and preparation, data preprocessing pipeline development, and the initial training and evaluation of both the tuberculosis and malaria
+detection CNN models. The primary deliverable of Sprint 2 was a baseline set of trained
+models with recorded performance metrics, which informed the augmentation and optimisation decisions of Sprint 3.
+Sprint 3 covered the refinement of the domain-shift-aware augmentation strategy,
+MixUp training implementation, model retraining with the refined pipeline, model quantisation, and TorchScript conversion for mobile deployment. The primary deliverable of
+Sprint 3 was the final optimised on-device model files for both diseases, ready for integration into the Flutter application.
+Sprint 4 covered the full development of the Flutter mobile application, the Django
+REST backend, the PostgreSQL and SQLite database implementation, the JWT and biometric authentication system, the patient record management interface, the AI diagnostic
+interface, and the AI chat integration. The primary deliverable of Sprint 4 was a fully
+functional integrated system connecting all components.
+Sprint 5 covered system integration testing, offline and online switching validation,
+user evaluation with medical personnel, documentation, and final report preparation. The
+primary deliverable of Sprint 5 was the evaluated and documented final system.
+As shown in Table 3.1, the five sprints were structured to follow a logical progression
+from design through model development, optimisation, implementation, and evaluation.
+The iterative nature of the Agile process was particularly valuable during Sprint 2 and
+Sprint 3, where model performance outcomes directly influenced the choice of augmentation parameters, learning rate schedules, and optimisation strategies applied in subsequent
+iterations. This flexibility would not have been achievable under a linear sequential model
+such as Waterfall, further justifying the Agile methodology selection.
+
+55
+
+Sprint
+
+Duration
+
+1
+
+Weeks 1 – 2
+
+Weeks Key Deliverables
+2
+
+System requirements definition, architecture
+design, database schema design, UML diagrams, development environment setup
+
+2
+
+Weeks 3 – 5
+
+3
+
+Dataset acquisition and preparation, data preprocessing pipeline, baseline TB and malaria
+CNN model training and evaluation
+
+3
+
+Weeks 6 – 8
+
+3
+
+Domain-shift-aware augmentation refinement,
+MixUp training, model retraining, quantisation,
+TorchScript conversion and mobile optimisation
+
+4
+
+Weeks 9 – 11
+
+3
+
+Flutter
+
+mobile
+
+application
+
+development,
+
+Django REST backend, database implementation,
+
+JWT and biometric authentication,
+
+patient records, AI diagnostic interface, AI chat
+integration
+5
+
+Weeks 12 – 13
+
+2
+
+System integration testing, offline and online
+switching validation, user evaluation, documentation, final report preparation
+
+Table 3.1: Agile Project Sprint Plan
+3.4 System Requirements
+3.4.1 Functional Requirements
+Functional requirements define the specific behaviours, functions, and capabilities that
+the system must provide to its users. The functional requirements of the proposed system were derived from the research objectives defined in Chapter 1 and the operational
+needs of the target user groups identified in Chapter 2. The functional requirements are
+
+56
+
+organised by user role and system component as follows.
+Doctor Requirements
+• The system shall allow a doctor to register and log in using a unique username and
+password.
+• The system shall require biometric or PIN verification before granting access to the
+application on the device.
+• The system shall allow a doctor to view, search, and manage all patient records
+registered within the system.
+• The system shall allow a doctor to upload a chest X-ray image and receive an AIgenerated tuberculosis detection result with a confidence score.
+• The system shall allow a doctor to upload a blood smear microscopy image and
+receive an AI-generated malaria detection result with a confidence score.
+• The system shall display a mandatory disclaimer alongside every AI-generated diagnostic result stating that the result requires confirmation by a qualified medical
+professional.
+• The system shall display a WHO-guided next-step recommendation alongside every
+diagnostic result based on the predicted condition and confidence level.
+• The system shall indicate clearly whether each diagnostic result was generated by
+the on-device model or the server-based model.
+• The system shall allow a doctor to save a diagnostic result and add a clinical note
+to a patient record.
+• The system shall provide an AI-assisted chat interface through which a doctor can
+ask clinical questions with the current patient’s full medical history automatically
+included as context.
+• The system shall function in offline mode, performing on-device diagnostic inference and storing results locally when internet connectivity is unavailable.
+• The system shall automatically synchronise locally stored offline results to the
+server database when internet connectivity is restored.
+57
+
+Patient Requirements
+• The system shall allow a patient to register and log in using a unique username and
+password.
+• The system shall require biometric or PIN verification before granting access to the
+application on the device.
+• The system shall allow a patient to view their own personal health information,
+medical history, diagnosis results, and doctor notes.
+• The system shall display diagnostic results to the patient in plain language without
+exposing raw AI confidence scores or technical model outputs.
+• The system shall not grant a patient access to any other patient’s records, the AI
+diagnostic interface, or the AI chat feature.
+System Requirements
+• The system shall enforce role-based access control, ensuring that doctors and patients can only access the features and data appropriate to their role.
+• The system shall authenticate all API communication between the mobile application and the backend server using JSON Web Tokens.
+• The system shall store all patient data securely in a PostgreSQL database on the
+server and in an encrypted SQLite database on the device.
+• The system shall provide a RESTful API interface for all communication between
+the mobile application and the backend server.
+3.4.2 Non-Functional Requirements
+Non-functional requirements define the quality attributes and operational constraints
+that the system must satisfy, independently of specific functional behaviours. The nonfunctional requirements of the proposed system are as follows.
+Performance
+• The system shall return an AI diagnostic result within five seconds when operating
+in online mode under normal network conditions.
+58
+
+• The system shall return an AI diagnostic result within three seconds when operating
+in offline mode using the on-device model.
+• The mobile application shall load and become fully interactive within four seconds
+of launch on a mid-range Android device.
+Security
+• The system shall enforce two-layer authentication comprising application-level JWT
+credential verification and device-level biometric or PIN verification for all users.
+• All data transmitted between the mobile application and the backend server shall be
+encrypted using HTTPS with TLS 1.2 or higher.
+• Patient health data stored on the device shall be encrypted at rest to protect against
+unauthorised access in the event of device loss or theft.
+• JWT tokens shall have a defined expiry period, after which re-authentication shall
+be required.
+Reliability
+• The system shall remain fully functional for core diagnostic and patient record features in the absence of internet connectivity.
+• No diagnostic result or patient record entry shall be lost in the event of a connectivity interruption during a session.
+• The offline synchronisation mechanism shall guarantee that all locally stored results
+are uploaded to the server database upon restoration of connectivity without data
+duplication.
+Usability
+• The mobile application interface shall be navigable by a doctor with no prior experience of the system within a single session without formal training.
+• All diagnostic results shall be presented in a clear, unambiguous format that communicates the prediction, confidence level, disclaimer, and recommended next step
+without requiring interpretation of technical terminology.
+59
+
+• The application shall support both English and French language interfaces to accommodate the bilingual healthcare workforce of Cameroon.
+Scalability
+• The system architecture shall support the future addition of diagnostic models for
+diseases beyond tuberculosis and malaria without requiring redesign of the core
+platform.
+• The backend shall be designed to support an increasing number of registered users
+and patient records without degradation of response time.
+Maintainability
+• All system components shall be implemented using modular, well-documented
+code to facilitate future maintenance, extension, and handover to other developers.
+3.5 System Design
+3.5.1 Use Case Diagram
+The use case diagram illustrates the interactions between the system actors and the
+functional capabilities of the proposed system. Two primary actors were identified: the
+Doctor and the Patient. The Doctor actor represents authenticated medical personnel who
+interact with the full range of system features, including AI-assisted diagnosis, patient
+record management, and the AI clinical chat interface. The Patient actor represents registered individuals who interact exclusively with their own digital health booklet to view
+personal health information, diagnosis results, and doctor notes. The use case diagram
+for the proposed system is presented in Figure 3.3.
+As shown in Figure 3.3 below, the Doctor actor is associated with the following use
+cases: Register and Login, Biometric or PIN Verification, View and Manage Patient Records, Upload Chest X-ray for TB Diagnosis, Upload Blood Smear Image for Malaria
+Diagnosis, View Diagnostic Result with Confidence Score and Recommendation, Save
+Diagnostic Result to Patient Record, Add Clinical Note, and Access AI Clinical Chat.
+The Patient actor is associated with the following use cases: Register and Login, Biometric or PIN Verification, View Personal Health Information, View Diagnosis Results
+in Plain Language, and View Doctor Notes. Both actors share the Register and Login
+60
+
+and Biometric or PIN Verification use cases, as authentication is mandatory for all system
+users regardless of role.
+
+Figure 3.2: Use Case Diagram of the Proposed Mobile AI Healthcare System
+
+3.5.2 Class Diagram
+The class diagram defines the static structure of the proposed system, presenting the
+principal software classes, their attributes, their methods, and the relationships between
+them. The class diagram for the proposed system is presented in Figure 3.3.
+As shown in Figure 3.3 below, the system comprises six principal classes. The User
+class serves as the base class for both the Doctor and Patient classes, containing shared
+attributes including user identification, name, email, password hash, role, and biometric
+status. The Doctor class extends User and includes additional methods for managing patient records, requesting diagnoses, and accessing the AI chat. The Patient class extends
+User and contains attributes for personal health information and methods for viewing records and results. The Diagnosis class stores the result of each AI diagnostic session,
+including the disease type, model prediction, confidence score, result source flag, image
+reference, and timestamp. The PatientRecord class maintains the longitudinal health history of each patient, linking multiple Diagnosis instances and doctor notes to a single
+patient. The ChatMessage class stores each exchange between a doctor and the AI chat
+engine, including the patient context snapshot used at the time of the query.
+
+61
+
+Figure 3.3: Class Diagram of the Proposed Mobile AI Healthcare System
+3.5.3 Sequence Diagrams
+Sequence diagrams illustrate the interactions between system components over time
+for specific operational scenarios. Four key scenarios were identified for the proposed
+system: user authentication, AI diagnosis in online mode, AI diagnosis in offline mode,
+and AI chat. The two most critical scenarios are presented below.
+Online AI Diagnosis Sequence Diagram
+The online diagnosis sequence diagram illustrates the interactions between the doctor,
+the mobile application, the Django backend, the full-precision AI model, and the PostgreSQL database during a diagnostic session when internet connectivity is available. The
+sequence diagram for online AI diagnosis is presented in Figure 3.4.
+As shown in Figure 3.4, the online diagnosis sequence begins when the doctor selects
+a patient and uploads a diagnostic image through the mobile application. The application
+transmits the image and patient identifier to the Django backend via an authenticated API
+request. The backend routes the image to the appropriate full-precision AI model, either
+the tuberculosis or malaria detection model, depending on the selected disease type. The
+62
+
+model performs inference and returns the prediction, confidence score, and source flag to
+the backend. The backend constructs the result response including the WHO-guided nextstep recommendation and returns it to the mobile application. The application displays
+the result to the doctor and upon confirmation saves the diagnosis to the patient record in
+the PostgreSQL database.
+
+Figure 3.4: Sequence Diagram — AI Diagnosis (Online Mode)
+
+3.5.4 Activity Diagrams
+Activity diagrams illustrate the workflow and decision logic of key operational processes within the proposed system. Two principal activity diagrams were developed: the
+doctor diagnosis workflow and the offline and online synchronisation workflow.
+Doctor Diagnosis Workflow
+The activity diagram for the doctor diagnosis workflow illustrates the complete sequence of actions from patient selection through to result display and record saving. The
+diagram is presented in Figure 3.9.
+As shown in Figure 3.5 below, the workflow begins when the doctor logs into the system and selects a patient record. The doctor selects the disease type, either tuberculosis
+or malaria, and uploads the corresponding diagnostic image. The system checks internet connectivity and routes the inference request to either the server-based full-precision
+63
+
+model or the on-device quantised model accordingly. The result is displayed to the doctor with the confidence score, mandatory disclaimer, WHO next-step recommendation,
+and source flag. The doctor reviews the result, optionally adds a clinical note, and saves
+the diagnosis to the patient record. The patient record is updated and the result becomes
+visible to the patient through their digital health booklet.
+Offline and Online Synchronisation Workflow
+The activity diagram for the synchronisation workflow illustrates how the system manages diagnostic results generated in offline mode and ensures they are reliably synchronised to the server database when connectivity is restored. The diagram is presented in
+Figure 3.5.
+As shown in Figure 3.5, when a diagnostic result is generated in offline mode, it is
+immediately stored in the local SQLite database with a synchronisation status flag set
+to pending. The system continuously monitors network connectivity in the background.
+When connectivity is detected, the sync manager retrieves all records with a pending synchronisation status from the SQLite database and transmits them to the Django backend
+via authenticated API requests. Upon successful server confirmation of each record, the
+synchronisation status flag is updated to synced and the record is marked as complete. If
+transmission fails due to a connectivity interruption during the sync process, the record
+retains its pending status and the sync process is retried on the next connectivity event,
+ensuring no diagnostic result is lost.
+
+64
+
+Figure 3.5: Activity Diagram Doctor Diagnosis Workflow and Offline/Online Synchronisation Workflow
+3.6 Dataset Description and Preparation
+3.6.1 Tuberculosis Dataset Description
+Two publicly available chest X-ray datasets were used for the training and evaluation
+of the tuberculosis detection model. The first dataset, the Shenzhen Chest X-ray Dataset, was collected from Shenzhen No. 3 People’s Hospital in collaboration with Guangdong Medical College in China and contains 662 posterior-anterior chest X-ray images, of
+which 336 are tuberculosis positive and 326 are normal Jaeger et al. (2014). The second
+dataset, the Montgomery County Chest X-ray Dataset, was collected from the Department of Health and Human Services of Montgomery County, Maryland, and contains
+138 posterior-anterior chest X-ray images, of which 58 are tuberculosis positive and 80
+are normal Jaeger et al. (2014). Both datasets were collected under real-world clinical
+
+65
+
+conditions and contain associated radiologist readings confirming the ground truth labels.
+The two datasets were combined to produce a unified tuberculosis dataset of 800 images,
+comprising 394 tuberculosis positive and 406 normal cases, providing a near-balanced
+class distribution suitable for binary classification training.
+3.6.2 Malaria Dataset Description
+The NIH Malaria Cell Images Dataset was used for the training and evaluation of
+the malaria detection model. The dataset was developed by researchers at the Lister Hill
+National Center for Biomedical Communications at the United States National Library
+of Medicine and contains 27,558 segmented cell images derived from Giemsa-stained
+thin blood smear slides prepared from 200 patients Rajaraman et al. (2018). The dataset
+comprises 13,779 parasitised cell images and 13,779 uninfected cell images, providing
+a perfectly balanced binary classification dataset. A critically important characteristic of
+this dataset for the present study is that the original slide images were captured using a
+smartphone camera held to the eyepiece of a light microscope, closely mirroring the image acquisition conditions anticipated in the target deployment environment of peripheral
+health facilities in Cameroon.
+3.6.3 Data Preprocessing for Tuberculosis Images
+All chest X-ray images were preprocessed prior to training to ensure consistency and
+compatibility with the MobileNetV2 input requirements. Preprocessing steps applied to
+tuberculosis images included resizing all images to 224 by 224 pixels, converting all images to RGB format, and applying ImageNet mean and standard deviation normalisation
+with mean values of 0.485, 0.456, and 0.406 and standard deviation values of 0.229,
+0.224, and 0.225 across the three colour channels respectively. These normalisation values are standard for ImageNet-pretrained models and ensure that the input distribution
+of the fine-tuning data is consistent with that used during the original pre-training of the
+MobileNetV2 backbone.
+3.6.4 Data Preprocessing for Malaria Images
+Malaria cell images were preprocessed using the same resizing and normalisation
+pipeline applied to tuberculosis images. Additionally, given the relatively small and uniform size of the segmented cell images in the NIH dataset, a centre crop operation was
+
+66
+
+applied prior to resizing to remove peripheral artefacts introduced during the automated
+cell segmentation process. This step improved the consistency of the cell region presented
+to the model across the dataset.
+
+Figure 3.6: Data Preprocessing and Augmentation Pipeline
+
+3.7 Model Design and Development
+3.7.1 Selection of MobileNetV2 Architecture
+The MobileNetV2 architecture was selected as the backbone for both the tuberculosis and malaria detection models based on three principal criteria. First, MobileNetV2 was specifically designed for efficient inference on mobile and resource-constrained
+devices, achieving competitive classification accuracy whilst requiring substantially fewer
+parameters and multiply-add operations than larger architectures such as ResNet50 and
+VGG16 Sandler et al. (2018). Second, the inverted residual and linear bottleneck design
+of MobileNetV2 has been demonstrated to quantise with minimal accuracy degradation,
+making it particularly well-suited to the post-training quantisation pipeline required for
+on-device deployment in the present study. Third, MobileNetV2 is available with weights
+pre-trained on the ImageNet dataset through the PyTorch torchvision library, enabling
+immediate application of transfer learning without requiring additional data collection or
+67
+
+computational resources for pre-training.
+In addition to quantisation, structured pruning was considered as a complementary
+model compression strategy to further reduce the computational footprint of the deployed
+models. Structured pruning removes entire convolutional filters that contribute least to
+the model output, producing a genuinely smaller and faster network rather than simply
+reducing numerical precision. However, the application of structured pruning requires
+sufficient training data to fine-tune the pruned model and recover accuracy lost during
+the pruning process. Given that the malaria detection model was trained on 27,558 images, sufficient data was available to support pruning at a conservative rate of 20% of
+filters followed by fine-tuning. In contrast, the tuberculosis detection model was trained
+on a combined dataset of only 800 images, which was considered insufficient to reliably recover diagnostic accuracy after pruning. Structured pruning was therefore applied
+exclusively to the malaria detection model, whilst the tuberculosis detection model was
+compressed through quantisation alone. This decision reflects the principle that model
+compression strategies must be selected in accordance with the specific data availability constraints of each task, a consideration that is particularly important in low-resource
+medical AI deployment contexts Deng et al. (2020).
+3.7.2 Transfer Learning Strategy
+Transfer learning was applied to both models by initialising the MobileNetV2 backbone with ImageNet pre-trained weights and replacing the original classification head
+with a custom binary classification head consisting of a dropout layer with a rate of 0.3,
+a fully connected layer with 256 units and ReLU activation, a second dropout layer with
+a rate of 0.2, and a final fully connected layer with a single output unit followed by a
+sigmoid activation function producing a probability score between zero and one. The sigmoid output represents the probability of the positive class, with tuberculosis positive or
+malaria parasitised respectively.
+During the initial training phase, the early layers of the MobileNetV2 backbone were
+frozen to preserve the low-level and mid-level feature representations learned during ImageNet pre-training. Only the custom classification head and the final twenty layers of the
+backbone were left trainable. This selective fine-tuning strategy reduced the risk of overfitting on the relatively small tuberculosis dataset whilst allowing the higher-level feature
+representations of the backbone to be adapted to the specific visual characteristics of chest
+68
+
+X-ray and blood smear images. In the second training phase, all layers were unfrozen and
+the entire network was fine-tuned at a reduced learning rate to allow global optimisation
+of the model parameters.
+3.7.3 Domain-Shift-Aware Augmentation Strategy
+A domain-shift-aware data augmentation pipeline was designed for each model to
+improve robustness to the image quality variability expected in the target deployment
+environment. The augmentation strategy was informed by the specific sources of image
+degradation anticipated in peripheral health facilities in Cameroon, as reviewed in Section
+2.6.
+For the tuberculosis detection model, augmentation transforms simulating real-world
+chest X-ray variability were applied during training. These included random rotation
+within a range of plus or minus fifteen degrees to simulate variable patient positioning,
+random horizontal flipping, brightness and contrast variation within a range of plus or
+minus 30% to simulate variable X-ray exposure settings, Gaussian blur with a kernel size
+of three to simulate low-resolution digital X-ray equipment, and random affine transformation with a translation range of ten percent to simulate patient movement during image
+acquisition.
+For the malaria detection model, additional augmentation transforms were applied to
+simulate the specific degradation introduced by smartphone-captured microscopy images.
+These included vignetting simulation achieved by applying a radially varying darkening
+mask to the image to replicate the circular aperture effect of the microscope eyepiece,
+colour jitter with hue and saturation variation to simulate the automatic white balance
+correction of smartphone cameras, and defocus blur simulation to replicate variable focus
+resulting from manual camera positioning. The complete augmentation parameters for
+both models are presented in Table 3.3.
+
+69
+
+Table 3.1: Domain-Shift-Aware Augmentation Parameters for TB and Malaria Models
+Augmentation Transform Parameter
+
+TB Model Malaria Model
+
+Random Rotation
+
+Range (degrees)
+
+±15
+
+±10
+
+Random Horizontal Flip
+
+Probability
+
+0.5
+
+0.5
+
+Brightness Variation
+
+Range
+
+±0.3
+
+±0.2
+
+Contrast Variation
+
+Range
+
+±0.3
+
+±0.2
+
+Gaussian Blur
+
+Kernel Size
+
+3
+
+3
+
+Affine Translation
+
+Range (%)
+
+10
+
+5
+
+Colour Jitter (Hue)
+
+Range
+
+–
+
+±0.1
+
+Colour Jitter (Saturation)
+
+Range
+
+–
+
+±0.3
+
+Vignetting Simulation
+
+Radius Factor
+
+–
+
+0.85
+
+Defocus Blur
+
+Kernel Size
+
+–
+
+5
+
+MixUp
+
+Alpha
+
+0.2
+
+0.2
+
+3.7.4 MixUp Training
+MixUp training was applied to both the tuberculosis and malaria detection models
+during the training phase to improve model robustness to ambiguous and degraded input
+images. As described in Section 2.6, MixUp generates virtual training examples by computing convex combinations of pairs of training images and their corresponding labels,
+training the model to produce smooth and well-calibrated output probability distributions
+rather than sharp memorised decision boundaries Zhang et al. (2018). An alpha value of
+0.2 was used for the Beta distribution from which the mixing coefficient was sampled,
+consistent with the value recommended in the original MixUp publication and widely
+adopted in subsequent medical imaging studies. This technique was particularly valuable
+for the tuberculosis detection model, where the small size of the training dataset increased
+the risk of overfitting to specific image characteristics present in the training set.
+70
+
+3.7.5 Loss Function, Optimiser, and Hyperparameters
+Binary cross-entropy loss was used as the training objective for both models, as it is
+the standard loss function for binary classification tasks and is directly compatible with the
+sigmoid output of the custom classification head. The Adam optimiser was selected due
+to its adaptive learning rate properties and demonstrated effectiveness for fine-tuning pretrained convolutional neural network models on small to medium sized medical imaging
+datasets. An early stopping strategy was applied during training to prevent overfitting,
+whereby training was halted if the validation loss did not improve for five consecutive
+epochs. The model weights corresponding to the best validation loss observed during
+training were retained as the final model parameters. This strategy was particularly important for the tuberculosis model given the small size of the combined training dataset.
+The complete training and compression hyperparameters for both models are presented
+in Table 3.4.
+
+71
+
+Table 3.2: Training and Compression Hyperparameters for TB and Malaria Detection
+Models
+Hyperparameter
+
+TB Model
+
+Malaria Model
+
+Backbone Architecture
+
+MobileNetV2
+
+MobileNetV2
+
+Pre-trained Weights
+
+ImageNet
+
+ImageNet
+
+Input Image Size
+
+224 × 224
+
+224 × 224
+
+Batch Size
+
+32
+
+64
+
+Initial Learning Rate (Phase 1)
+
+0.001
+
+0.001
+
+Fine-tuning Learning Rate (Phase 2)
+
+0.0001
+
+0.0001
+
+Number of Epochs (Phase 1)
+
+20
+
+15
+
+Number of Epochs (Phase 2)
+
+30
+
+20
+
+Dropout Rate (Layer 1)
+
+0.3
+
+0.3
+
+Dropout Rate (Layer 2)
+
+0.2
+
+0.2
+
+Binary Cross-Entropy
+
+Binary Cross-Entropy
+
+Optimiser
+
+Adam
+
+Adam
+
+Early Stopping Patience
+
+5 epochs
+
+5 epochs
+
+Loss Function
+
+Model Compression Parameters
+Structured Pruning Applied
+
+No
+
+Yes
+
+Pruning Rate (Filters)
+
+N/A
+
+20%
+
+Pruning Method
+
+N/A
+
+L1-norm Filter Pruning
+
+Fine-tuning Epochs After Pruning
+
+N/A
+
+10
+
+Fine-tuning Learning Rate After Pruning
+
+N/A
+
+0.00005
+
+Quantisation Applied
+
+Yes
+
+Yes
+
+Quantisation Method
+
+Post-training Dynamic
+
+Post-training Dynamic
+
+Quantisation Precision
+
+float32 → int8
+
+float32 → int8
+
+Export Format
+
+TorchScript (.ptl)
+
+TorchScript (.ptl)
+
+72
+
+3.7.6 Model Architecture Diagram
+The MobileNetV2 architecture with the custom binary classification head used for
+both models is illustrated in Figure 3.14.
+
+Figure 3.7: MobileNetV2 Architecture with Custom Binary Classification Head
+
+73
+
+As shown in Figure 3.14, the model consists of the MobileNetV2 backbone comprising 19 inverted residual bottleneck blocks followed by a global average pooling layer,
+connected to the custom classification head consisting of two dropout and fully connected
+layers culminating in a sigmoid output producing the final diagnostic probability score.
+The MobileNetV2 backbone weights were initialised from ImageNet pre-training and selectively fine-tuned as described in Section 3.7.2. The custom classification head weights
+were initialised randomly and trained from scratch on the tuberculosis and malaria training datasets respectively.
+3.8 Mobile Model Optimisation and Deployment
+3.8.1 Overview of the Compression Pipeline
+The deployment of deep learning models on mobile devices in low-resource environments requires a systematic model compression pipeline that reduces model size and
+inference latency whilst preserving diagnostic accuracy to a clinically acceptable level.
+For the present study, a two-stage compression pipeline was designed and applied to both
+the tuberculosis and malaria detection models following the completion of training. The
+pipeline comprised structured filter pruning followed by post-training dynamic quantisation, with TorchScript export and PyTorch Mobile optimisation as the final deployment
+steps. As discussed in Section 3.7.1, structured pruning was applied only to the malaria
+detection model due to dataset size constraints, whilst quantisation was applied to both
+models. The complete compression and deployment pipeline is illustrated in Figure 3.15.
+
+74
+
+Figure 3.8: Model Compression and Mobile Deployment Pipeline
+As shown in Figure 3.8, the pipeline begins with the fully trained float32 model
+and proceeds through pruning where applicable, fine-tuning after pruning, quantisation,
+
+75
+
+TorchScript conversion, and mobile optimisation before producing the final on-device
+model file for integration into the Flutter mobile application.
+3.8.2 Structured Filter Pruning (Malaria Model)
+Structured pruning was applied to the malaria detection model using L1-norm filter
+pruning, in which convolutional filters with the smallest L1 norm values were identified
+and removed from each convolutional layer of the MobileNetV2 backbone. A global
+pruning rate of 20% was applied, meaning that 20% of filters across all convolutional layers were removed. This rate was selected based on evidence from the model compression
+literature demonstrating that pruning rates of 20 to 30% applied to MobileNet-family architectures achieve meaningful size reduction with minimal accuracy degradation when
+followed by adequate fine-tuning Deng et al. (2020). Following pruning, the model was
+fine-tuned for 10 additional epochs at a reduced learning rate of 0.00005 to allow the
+remaining weights to adapt and recover accuracy lost during the pruning process.
+3.8.3 Post-Training Dynamic Quantisation
+Post-training dynamic quantisation was applied to both models following the completion of training and, for the malaria model, after pruning and fine-tuning. Dynamic quantisation converts the float32 weight tensors of the model to int8 integer representations,
+reducing model size by approximately 75% and accelerating inference by exploiting the
+integer arithmetic capabilities of mobile processors Wu et al. (2020). Dynamic quantisation was selected over static quantisation because it does not require a calibration dataset
+to compute activation quantisation parameters, making it simpler to apply and more robust to distribution shift between training data and real-world deployment images. This
+property is particularly important in the low-resource deployment context of the present
+study, where clinical images may differ statistically from the training dataset.
+3.8.4 TorchScript Conversion and Mobile Optimisation
+Following quantisation, both models were exported to the TorchScript format using
+the torch.jit.trace function, which traces the model execution graph using a representative
+dummy input tensor and produces a self-contained platform-independent model representation executable without a Python runtime PyTorch Foundation (2023). The traced
+TorchScript model was subsequently optimised for mobile inference using the optim-
+
+76
+
+ize_for_mobile utility provided by the PyTorch Mobile framework, applying operator
+fusion, memory layout optimisation, and removal of training-specific operations unnecessary for inference. The optimised model was saved in the PyTorch Lite Interpreter format
+with the .ptl file extension, which is the format natively supported by the PyTorch Mobile
+runtime embedded within the Flutter application.
+3.8.5 Hybrid Offline and Online Inference Architecture
+The compressed on-device models were integrated within the Flutter mobile application alongside a connectivity-aware inference routing mechanism that automatically selects between on-device and server-based inference depending on network availability.
+When internet connectivity is detected, diagnostic image requests are routed to the Django
+backend server where inference is performed using the full-precision float32 models.
+When connectivity is unavailable, inference is performed locally using the compressed
+on-device models, ensuring diagnostic support remains continuously available regardless
+of network status.
+Each diagnostic result includes a source flag field explicitly indicating whether the result was produced by the full-precision server model or the compressed on-device model.
+This flag is displayed prominently in the result interface so that clinicians are always
+aware of the inference context. Results generated in offline mode are stored in the local
+SQLite database with a synchronisation status of pending and are automatically transmitted to the PostgreSQL server database when connectivity is restored.
+
+77
+
+Bibliography
+Aboye, G. T., Simegn, G. L., and Aerts, J.-M. (2024). Assessment of the barriers and
+enablers of the use of mhealth systems in sub-saharan africa according to the perceptions of patients, physicians, and health care executives in ethiopia: Qualitative study.
+Journal of Medical Internet Research, 26:e50337.
+Adeleke, I. T., Erinoso, O. A., Adekanye, A. O., Adefuye, B. O., Akanbi, M. O., and
+Abubakar, I. (2025). A decade of designing and implementing electronic health records
+in sub-saharan africa: A scoping review. Global Health Action, 18(1):2492913.
+Adepoju, I. O., Albersen, B. J. A., De Brouwere, V., van Roosmalen, J., and Zweekhorst,
+M. (2021). mhealth for clinical decision-making in sub-saharan africa: A scoping
+review. JMIR mHealth and uHealth, 5(3):e5–e17.
+Al-Ganad, A., Al-Shahdhi, A., Al-Dhaifi, O., Hajeb, E., Hajeb, H., and Al-Motarreb, A.
+(2026). Deploying medical ai in low-resource settings: A scoping review of challenges
+and strategies. Frontiers in Digital Health, 8:1743634.
+Alhammad, N., Alajlani, M., Abd-alrazaq, A., Epiphaniou, G., and Arvanitis, T. (2024).
+Patients’ perspectives on the data confidentiality, privacy, and security of mhealth apps:
+Systematic review. Journal of Medical Internet Research, 26:e50715.
+Aljedaani, B., Ahmad, A., Zahedi, M., and Babar, M. A. (2021). End-users’ knowledge
+and perception about security of mobile health apps: A case study with two saudi
+arabian mhealth providers. arXiv preprint arXiv:2101.10412.
+Beck, K., Beedle, M., van Bennekum, A., Cockburn, A., Cunningham, W., Fowler, M.,
+Grenning, J., Highsmith, J., Hunt, A., Jeffries, R., Kern, J., Marick, B., Martin, R. C.,
+Mellor, S., Schwaber, K., Sutherland, J., and Thomas, D. (2001). Manifesto for agile
+software development. https://agilemanifesto.org/. Accessed 2024.
+Betjeman, T. J., Soghoian, S. E., and Foran, M. P. (2013). mhealth in sub-saharan africa.
+International Journal of Telemedicine and Applications, 2013:482324.
+Boehm, B. W. (1988). A spiral model of software development and enhancement. IEEE
+Computer, 21(5):61–72.
+78
+
+Chlap, P., Min, H., Vandenberg, N., Dowling, J., Holloway, L., and Haworth, A. (2021). A
+review of medical image data augmentation techniques for deep learning applications.
+Journal of Medical Imaging and Radiation Oncology, 65(5):545–563.
+Deng, L., Li, G., Han, S., Shi, L., and Xie, Y. (2020). Model compression and hardware
+acceleration for neural networks: A comprehensive survey. Proceedings of the IEEE,
+108(4):485–532.
+Esteva, A., Robicquet, A., Ramsundar, B., Kuleshov, V., DePristo, M., Chou, K., Cui, C.,
+Corrado, G., Thrun, S., and Dean, J. (2019). A guide to deep learning in healthcare.
+Nature Medicine, 25(1):24–29.
+Eze, E., Adeleye, O., Eze, C., and Nweke, C. (2023). Current evidence on the use of
+mhealth approaches in sub-saharan africa: A scoping review. Smart Health, 30:100418.
+Fonkwo, P. N., Ako, S. M., and Ngwa, E. B. (2023). Impact of the anglophone crisis on
+healthcare delivery in the north-west and south-west regions of cameroon. Conflict and
+Health, 17(1):1–12.
+Gahagan, K., Subramanian, R., Cloos, L., Agha, G., and Labrique, A. (2023). Public
+health research using cell phone derived mobility data in sub-saharan africa: Ethical
+issues. Public Health Reviews, 44:1605974.
+Gaines, S., Shah, N., Aiken, E., and Bhatt, D. L. (2021). The agile deployment of machine
+learning models in healthcare. Frontiers in Big Data, 1:7.
+Gilbert, S., Fenech, M., Idris, A., and Turk, E. (2020). Periodic manual algorithm
+updates and generalizability: A developer’s response. JMIR mHealth and uHealth,
+9(6):e26514.
+Grand View Research (2020). mhealth market size report, 2020-2027. Technical report,
+Grand View Research Inc.
+Guan, H. and Liu, M. (2021). Domain adaptation for medical image analysis: A survey.
+IEEE Transactions on Biomedical Engineering, 69(3):1173–1185.
+Gurung, G., Adhikari, B., Niraula, G., Mishra, S. R., and Paudyal, V. (2020). Software
+development life cycle models: A comparative study. International Journal of Scientific
+Research in Computer Science, Engineering and Information Technology, 6(4):30–37.
+79
+
+Hariri, S., Mansouri, N., and Taghavi, M. (2025). Biometric technology in healthcare:
+Balancing security and accessibility. World Journal of Advanced Research and Reviews, 26(1):1864–1870.
+He, K., Zhang, X., Ren, S., and Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern
+Recognition (CVPR), pages 770–778. IEEE.
+Howard, A. G., Zhu, M., Chen, B., Kalenichenko, D., Wang, W., Weyand, T., Andreetto,
+M., and Adam, H. (2017). Mobilenets: Efficient convolutional neural networks for
+mobile vision applications. arXiv preprint arXiv:1704.04861.
+Ibeneme, S., Ibeneme, G., Myezwa, H., Ezuma, A., and Busse, H. (2023). Editorial:
+Harnessing digital health innovations to improve healthcare delivery in africa: Progress,
+challenges and future directions. Frontiers in Digital Health, 5:1175453.
+Jaeger, S., Candemir, S., Antani, S., Wáng, Y.-X. J., Lu, P.-X., and Thoma, G. (2014).
+Two public chest x-ray datasets for computer-aided screening of pulmonary diseases.
+Quantitative Imaging in Medicine and Surgery, 4(6):475–477.
+Kanafani, M., Schreiber-Stainthorp, W., Majumdar, S., Kappe, S. H. I., and Bhatt, D. L.
+(2024). Application of convnext with transfer learning and data augmentation for malaria parasite detection in resource-limited settings using microscopic images. medRxiv
+preprint. https://doi.org/10.1101/2024.10.31.24316549.
+Kassim, Y. M., Yang, F., Yu, H., Maude, R. J., and Antani, S. (2021). Diagnosing malaria
+patients with plasmodium falciparum and vivax using deep learning for thick smear
+images. Diagnostics, 11(11):1994.
+Khanna, D., Khanna, S., Khanna, P., Pasricha, S., and Khanna, A. (2024). Does an app
+a day keep the doctor away? ai symptom checker applications, entrenched bias, and
+professional responsibility. PLOS Digital Health, 3(5):e0000498.
+Kirefu, F., Nabirye, R. C., Musiimenta, A., and Tumuhimbise, W. (2021). Mapping
+evidence of mobile health technologies for disease diagnosis and treatment support by
+health workers in sub-saharan africa: A scoping review. BMC Medical Informatics and
+Decision Making, 21(1):11.
+80
+
+Kokol, P., Kokol, M., and Zagoranski, S. (2022). Agile software development in healthcare: A synthetic scoping review. Applied Sciences, 12(19):9462.
+LeCun, Y., Bengio, Y., and Hinton, G. (2015). Deep learning. Nature, 521(7553):436–
+444.
+Liang, Z., Powell, A., and Hameed, S. (2016). Deep learning for malaria parasite detection
+in thin blood smear images. arXiv preprint arXiv:1608.01301.
+Litjens, G., Kooi, T., Bejnordi, B. E., Setio, A. A. A., Ciompi, F., Ghafoorian, M., van der
+Laak, J. A. W. M., van Ginneken, B., and Sánchez, C. I. (2017). A survey on deep
+learning in medical image analysis. Medical Image Analysis, 42:60–88.
+McCool, J., Dobson, R., Whittaker, R., and Paton, C. (2022). Mobile health in low- and
+middle-income countries. Annual Review of Public Health, 43:525–539.
+Mohammed, T., Assefa, S. G., and Wagari, G. M. (2025). Evaluating the impact of
+electronic medical records on healthcare digitalization efforts in oromia, ethiopia: A
+qualitative study. Digital Health, 11:20552076251379734.
+Mougang, Y. C., Ndongo, C. B., and Essi, M. J. (2020). Health workforce distribution in
+cameroon: Challenges and perspectives. Health Policy and Planning, 35(4):412–420.
+Mutia, D. M., Ogutu, M., and Mwangi, A. (2025). Evidence-based healthcare practice
+adoption: The impact of electronic health records. Africa’s Public Service Delivery
+and Performance Review, 13(1):728.
+Mwangi, J., Wanjiku, R., and Kimani, S. (2014). Use of electronic health records in
+sub-saharan africa: Progress and challenges. Journal of Health Informatics in Africa,
+2(1):1–9.
+Nkwescheu, A. S., Nguefack-Tsague, G., and Fokam, J. (2023). Tuberculosis burden in
+cameroon: An update on incidence and mortality. BMJ Open, 13(2):e067890.
+Obermeyer, Z., Powers, B., Vogeli, C., and Mullainathan, S. (2019). Dissecting racial bias
+in an algorithm used to manage the health of populations. Science, 366(6464):447–453.
+
+81
+
+Odera, A., Kofi-Boateng, E., and Kumah, E. (2023). Operationalising ai ethics through
+the agile software development lifecycle: A case study of ai-enabled mobile health
+applications. AI and Ethics, 4(2):521–535.
+Omenka, O. I., Nwachukwu, C. E., Abara, E. O., and Ejim, E. C. (2023). Healthcare workers’ perspectives of mhealth adoption factors in the developing world: Scoping review.
+International Journal of Environmental Research and Public Health, 20(2):1244.
+Osei, E., Agyemang-Duah, W., Akyirem, S., and Asante, F. (2022). Artificial intelligence
+in global health: An unfair future for health in sub-saharan africa?
+
+Health Affairs
+
+Scholar, 3(2):qxaf023.
+Owotunde, O., Benson, N., Agbakahi, G., Okenwa, C., Akpudo, U., GrigsbyToussaint, D. S., and Bhavnani, S. K. (2021).
+
+Lightweight mobile automated
+
+assistant-to-physician for global lower-resource areas.
+
+ht-
+
+medRxiv preprint.
+
+tps://doi.org/10.1101/2021.11.01.21265487.
+People
+raises
+
+of
+
+Color
+
+$2.5m
+
+form.
+
+in
+
+Tech
+
+(2023).
+
+to
+
+pull
+
+the
+
+Cameroonian
+
+healthcare
+
+ecosystem
+
+healthtech
+
+waspito
+
+into
+
+plat-
+
+one
+
+https://peopleofcolorintech.com/articles/
+
+cameroonian-healthtech-waspito-raises-2-5m-to-pull-the-healthcare-e
+Accessed 2024.
+PyTorch Foundation (2023). Pytorch mobile: End-to-end workflow from training to deployment for ios and android. https://pytorch.org/mobile/home/. Accessed 2024.
+Rahman, T., Khandakar, A., Kadir, M. A., Islam, K. R., Islam, K. F., Mazhar, R., Hamid,
+T., Islam, M. T., Kashem, S., Mahbub, Z. B., Ayari, M. A., and Chowdhury, M. E. H.
+(2020). Reliable tuberculosis detection using chest x-ray with deep learning, segmentation and visualization. IEEE Access, 8:191586–191601.
+Rajaraman, S. and Antani, S. K. (2020). Modality-specific deep learning model ensembles
+toward improving tb detection in chest radiographs. IEEE Access, 8:27318–27326.
+Rajaraman, S., Antani, S. K., Poostchi, M., Silamut, K., Hossain, M. A., Maude, R. J.,
+Jaeger, S., and Thoma, G. R. (2018). Pre-trained convolutional neural networks as fea82
+
+ture extractors toward improved malaria parasite detection in thin blood smear images.
+PeerJ, 6:e4568.
+Rajpurkar, P., Irvin, J., Zhu, K., Yang, B., Mehta, H., Duan, T., and Ng, A. Y. (2017).
+Chexnet: Radiologist-level pneumonia detection on chest x-rays with deep learning.
+arXiv preprint arXiv:1711.05225.
+Rathi, S., Sharma, P., and Gupta, A. (2025). Implementing role-based access control
+for healthcare data management systems. International Journal of Engineering and
+Extended Technologies Research, 11(2):3297–3311.
+Rezaee, R., Khashayar, M., Saeedinezhad, S., Nasiri, M., and Zare, S. (2023). Critical criteria and countermeasures for mobile health developers to ensure mobile health privacy
+and security: Mixed methods study. JMIR mHealth and uHealth, 11:e39055.
+Richens, J. G., Lee, C. M., and Johri, S. (2020). Improving the accuracy of medical
+diagnosis with causal machine learning. Nature Communications, 11:3923.
+Sandhu, R. S., Coyne, E. J., Feinstein, H. L., and Youman, C. E. (1996). Role-based
+access control models. IEEE Computer, 29(2):38–47.
+Sandler, M., Howard, A., Zhu, M., Zhmoginov, A., and Chen, L.-C. (2018). Mobilenetv2:
+Inverted residuals and linear bottlenecks. In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition (CVPR), pages 4510–4520. IEEE.
+Santosh, K. C., Allu, S., Rajaraman, S., and Antani, S. (2022). Advances in deep learning for tuberculosis screening using chest x-rays: The last 5 years review. Journal of
+Medical Systems, 46(11):82.
+Sendra-Balcells, C., Campello, V. M., Torrents-Barrena, J., Ahmed, Y. A., Elattar, M.,
+Ohene-Botwe, B., Nyangulu, P., Stones, W., Ammar, M., Benamer, L. N., Kisembo,
+H. N., Sereke, S. G., Wanyonyi, S. Z., Temmerman, M., Gratacós, E., Bonet, E., Eixarch, E., Mikolaj, K., Tolsgaard, M. G., and Lekadir, K. (2023). Generalisability of
+fetal ultrasound deep learning models to low-resource imaging settings in five african
+countries. Scientific Reports, 13:2765.
+Severe Malaria Observatory (2023). Malaria in cameroon: Key facts and figures. https:
+//www.severemalaria.org/countries/cameroon. Retrieved 2023.
+83
+
+Siłka, W., Wieczorek, M., Siłka, J., and Woźniak, M. (2023). Malaria detection using
+advanced deep learning architecture. Sensors, 23(3):1501.
+Sommerville, I. (2016). Software engineering. Pearson Education, 10th edition.
+Syofian, A., Fajri, R., and Ramadhan, R. (2024). Restful api security using json web token
+with hmac-sha512 algorithm in session management. Journal of Applied Engineering
+and Technological Science, 5(2):149–155.
+Thambawita, V., Isaksen, J. L., Hicks, S. A., Ghouse, J., Kanters, J. K., Graff, C., Struijk,
+J. J., Holm, E. A., Ahlberg, G., Tfelt-Hansen, J., Svendsen, J. H., Halvorsen, P., Riegler, M. A., and Hammer, H. L. (2022). Keep it simple: Designing a user-centred digital information system to support chronic disease management in low/middle-income
+countries. Journal of the American Medical Informatics Association, 29(8):1440–1449.
+United Nations Office for the Coordination of Humanitarian Affairs (2023). Cameroon:
+Humanitarian situation report. https://www.unocha.org/cameroon.
+Wikipedia (2024).
+
+Babylon health.
+
+https://en.wikipedia.org/wiki/
+
+Babylon_Health. Accessed 2024.
+World Health Organisation (2011). mHealth: New horizons for health through mobile
+technologies. WHO Press.
+World Health Organisation (2022). World health statistics 2022: Monitoring health for
+the SDGs. World Health Organisation.
+World Health Organisation (2023a). Global tuberculosis report 2023. World Health
+Organisation.
+World Health Organisation (2023b). World malaria report 2023. WHO Press.
+Wu, H., Judd, P., Zhang, X., Isaev, M., and Micikevicius, P. (2020). Integer quantization for deep learning inference: Principles and empirical evaluation. arXiv preprint
+arXiv:2004.09602.
+Xu, X., Ding, Y., Hu, S. X., Niemier, M., Cong, J., Hu, Y., and Shi, Y. (2023). Scaling for
+edge inference of deep neural networks. Nature Electronics, 1(4):216–222.
+
+84
+
+Yusuf, M., Ojo, O. S., Okeke, C., and Adewale, O. (2024). Machine and deep learning
+methods in identifying malaria through microscopic blood smear: A systematic review.
+Expert Systems with Applications, 255:124710.
+Zhang, H., Cissé, M., Dauphin, Y. N., and Lopez-Paz, D. (2018). Mixup: Beyond empirical risk minimization. In 6th International Conference on Learning Representations
+(ICLR 2018). OpenReview.
+
+85
+
+

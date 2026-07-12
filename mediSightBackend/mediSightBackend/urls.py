@@ -23,6 +23,12 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 urlpatterns = [
     path('admin/', admin.site.urls),
     
+    # App APIs
+    path('api/v1/accounts/', include('accounts.urls')),
+    path('api/v1/diagnostics/', include('diagnostics.urls')),
+    path('api/v1/records/', include('records.urls')),
+    path('api/v1/chat/', include('chat.urls')),
+
     # Swagger API Docs
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
