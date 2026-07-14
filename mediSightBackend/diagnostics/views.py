@@ -14,10 +14,10 @@ try:
     import torch
     import torchvision.transforms as transforms
     from PIL import Image
-    MODEL_PATH = os.path.join(settings.BASE_DIR, 'malaria_model_mobile.ptl')
-    _model = torch.jit._load_for_lite_interpreter(MODEL_PATH)
+    MODEL_PATH = os.path.join(settings.BASE_DIR.parent, 'malaria_model_mobile.ptl')
+    _model = torch.jit.load(MODEL_PATH)
     _model.eval()
-    print("Successfully loaded PyTorch mobile model on backend.")
+    print("Successfully loaded PyTorch model on backend.")
 except Exception as e:
     _model = None
     print(f"Warning: Failed to load PyTorch model: {e}")
