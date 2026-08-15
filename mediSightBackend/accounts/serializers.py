@@ -10,7 +10,27 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
 class PatientProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientProfile
-        fields = ['patient_id', 'gender', 'date_of_birth', 'blood_group', 'genotype', 'allergies', 'current_status', 'personal_health_information']
+        fields = ['id', 'patient_id', 'gender', 'date_of_birth', 'blood_group', 'genotype', 'allergies', 'current_status', 'personal_health_information']
+
+class DoctorPatientListSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    username = serializers.CharField(source='user.username', read_only=True)
+    email = serializers.EmailField(source='user.email', read_only=True)
+    appointment_count = serializers.IntegerField(read_only=True)
+    scan_count = serializers.IntegerField(read_only=True)
+    consultation_count = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = PatientProfile
+        fields = [
+            'id', 'patient_id', 'name', 'username', 'email', 'gender',
+            'date_of_birth', 'blood_group', 'current_status',
+            'appointment_count', 'scan_count', 'consultation_count',
+        ]
+
+    def get_name(self, obj):
+        full_name = obj.user.get_full_name().strip()
+        return full_name or obj.user.username
 
 class UserSerializer(serializers.ModelSerializer):
     doctor_profile = DoctorProfileSerializer(read_only=True)

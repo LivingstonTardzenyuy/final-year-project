@@ -45,6 +45,16 @@ class ConsultationCreateAPIView(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
 
+    def perform_create(self, serializer):
+        from rest_framework.exceptions import ValidationError
+        patient_id = self.request.data.get('patient') or self.request.data.get('patient_record')
+        if not patient_id:
+            raise ValidationError({"patient": "This field is required."})
+        patient = get_object_or_404(PatientProfile, id=patient_id)
+        record, _ = PatientRecord.objects.get_or_create(patient=patient)
+        doctor = getattr(self.request.user, 'doctor_profile', None)
+        serializer.save(patient_record=record, doctor=doctor)
+
 class AIScanCreateAPIView(generics.CreateAPIView):
     """
     Upload an AI Scan result to a patient's record.

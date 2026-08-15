@@ -22,6 +22,16 @@ except Exception as e:
     _model = None
     print(f"Warning: Failed to load PyTorch model: {e}")
 
+def _coerce_patient_pk(value):
+    """FormData sends strings; UI may also send display ids like PT-2."""
+    if value is None or value == '':
+        return None
+    if isinstance(value, int):
+        return value
+    digits = ''.join(ch for ch in str(value) if ch.isdigit())
+    return int(digits) if digits else None
+
+
 class OnlineScanAPI(generics.CreateAPIView):
     """
     Perform an online AI diagnostic scan using PyTorch inference.
@@ -32,7 +42,7 @@ class OnlineScanAPI(generics.CreateAPIView):
 
     @extend_schema(tags=['Diagnostics'])
     def post(self, request, *args, **kwargs):
-        patient_id = request.data.get('patient')
+        patient_id = _coerce_patient_pk(request.data.get('patient'))
         disease_type = request.data.get('disease_type')
         image_file = request.FILES.get('image')
         
@@ -95,6 +105,12 @@ class OnlineScanAPI(generics.CreateAPIView):
 
         # Mutate the request data to include our simulated model results
         data = request.data.copy()
+        if patient_id is None:
+            return Response(
+                {"patient": ["A valid numeric patient id is required."]},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        data['patient'] = patient_id
         data['model_prediction'] = prediction
         data['confidence_score'] = confidence
         data['result_source_flag'] = Diagnosis.ResultSource.ONLINE
@@ -121,6 +137,9 @@ class OfflineSyncAPI(generics.GenericAPIView):
         
         for item in diagnoses_data:
             item['result_source_flag'] = Diagnosis.ResultSource.OFFLINE
+            pk = _coerce_patient_pk(item.get('patient'))
+            if pk is not None:
+                item['patient'] = pk
             
         serializer = self.get_serializer(data=diagnoses_data, many=True)
         serializer.is_valid(raise_exception=True)

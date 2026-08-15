@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import DoctorRegisterAPI, PatientRegisterAPI, DoctorLoginAPI, PatientLoginAPI, UserAPI, DoctorProfileAPI, PatientProfileAPI, DoctorListAPI
+from .views import DoctorRegisterAPI, PatientRegisterAPI, DoctorLoginAPI, PatientLoginAPI, UserAPI, DoctorProfileAPI, PatientProfileAPI, DoctorListAPI, DoctorPatientListAPI
 
 urlpatterns = [
     path('auth/register/doctor/', DoctorRegisterAPI.as_view(), name='register_doctor'),
@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile/doctor/', DoctorProfileAPI.as_view(), name='profile_doctor'),
     path('profile/patient/', PatientProfileAPI.as_view(), name='profile_patient'),
     path('doctors/', DoctorListAPI.as_view(), name='list_doctors'),
+    path('patients/', DoctorPatientListAPI.as_view(), name='list_patients'),
 ]

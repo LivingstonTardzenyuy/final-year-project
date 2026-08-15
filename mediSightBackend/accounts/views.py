@@ -2,7 +2,8 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from drf_spectacular.utils import extend_schema
-from .serializers import UserSerializer, DoctorRegisterSerializer, PatientRegisterSerializer, DoctorLoginSerializer, PatientLoginSerializer, DoctorProfileSerializer, PatientProfileSerializer
+from django.db.models import Count, Q
+from .serializers import UserSerializer, DoctorRegisterSerializer, PatientRegisterSerializer, DoctorLoginSerializer, PatientLoginSerializer, DoctorProfileSerializer, PatientProfileSerializer, DoctorPatientListSerializer
 from .models import DoctorProfile, PatientProfile
 
 class DoctorRegisterAPI(generics.GenericAPIView):
@@ -149,4 +150,43 @@ class DoctorListAPI(generics.ListAPIView):
     def get_queryset(self):
         from .models import User
         return User.objects.filter(role=User.Role.DOCTOR, is_active=True)
+
+class DoctorPatientListAPI(generics.ListAPIView):
+    """
+    Doctor roster: all registered patients plus this doctor's activity counts.
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = DoctorPatientListSerializer
+
+    @extend_schema(tags=['Profiles'])
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        if not hasattr(self.request.user, 'doctor_profile'):
+            return PatientProfile.objects.none()
+
+        doctor = self.request.user.doctor_profile
+        return (
+            PatientProfile.objects
+            .select_related('user')
+            .annotate(
+                appointment_count=Count(
+                    'appointments',
+                    filter=Q(appointments__doctor=doctor),
+                    distinct=True,
+                ),
+                scan_count=Count(
+                    'diagnoses',
+                    filter=Q(diagnoses__doctor=doctor),
+                    distinct=True,
+                ),
+                consultation_count=Count(
+                    'record__consultations',
+                    filter=Q(record__consultations__doctor=doctor),
+                    distinct=True,
+                ),
+            )
+            .order_by('-appointment_count', '-scan_count', 'user__first_name')
+        )
 
